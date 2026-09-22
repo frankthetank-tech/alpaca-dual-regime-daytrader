@@ -1,0 +1,92 @@
+name: Strategy #3 Dual-Regime Long/Short Day Trading Bot
+
+on:
+  schedule:
+    # 09:45 AM EDT = 13:45 UTC (Mon-Fri) -> Macro Shield Evaluation, Screening & Bracket Stop Order Placement
+    - cron: '45 13 * * 1-5'
+    # 11:30 AM EDT = 15:30 UTC (Mon-Fri) -> Cancel Unfilled Resting Entry Orders (Remain 100% Cash)
+    - cron: '30 15 * * 1-5'
+    # 03:55 PM EDT = 19:55 UTC (Mon-Fri) -> Market-on-Close (MOC) Liquidation (100% Cash Overnight)
+    - cron: '55 19 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to execute'
+        required: true
+        default: 'status'
+        type: choice
+        options:
+          - status
+          - scan
+          - cutoff
+          - moc
+          - test
+
+permissions:
+  contents: write
+
+jobs:
+  run-trader:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Day Trading Action
+        env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          ALPACA_PAPER: 'True'
+          ALPACA_DATA_FEED: 'sip'
+        run: |
+          ACTION="${{ github.event.inputs.action }}"
+          
+          if [ -z "$ACTION" ]; then
+            # Determine action based on current UTC time during scheduled cron
+            HOUR=$(date -u +%H)
+            MINUTE=$(date -u +%M)
+            echo "Cron triggered at UTC $HOUR:$MINUTE"
+            if [ "$HOUR" -eq 13 ] || [ "$HOUR" -eq 14 ]; then
+              ACTION="scan"
+            elif [ "$HOUR" -eq 15 ] || [ "$HOUR" -eq 16 ]; then
+              ACTION="cutoff"
+            else
+              ACTION="moc"
+            fi
+          fi
+          
+          echo "Executing Strategy #3 Action: $ACTION"
+          
+          if [ "$ACTION" = "status" ]; then
+            python main.py --status
+          elif [ "$ACTION" = "scan" ]; then
+            python main.py --scan
+          elif [ "$ACTION" = "cutoff" ]; then
+            python main.py --cutoff
+          elif [ "$ACTION" = "moc" ]; then
+            python main.py --moc
+          elif [ "$ACTION" = "test" ]; then
+            python main.py --test
+          else
+            python main.py --status
+          fi
+
+      - name: Commit Strategy State Updates
+        run: |
+          git config --global user.name "Strategy 3 Cloud Bot"
+          git config --global user.email "bot@antigravity.system"
+          git add data/state.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update Strategy #3 state [skip ci]" && git push)
