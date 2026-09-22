@@ -9,7 +9,7 @@
   "entry_stop_price": 0.0,
   "stop_loss_price": 0.0,
   "take_profit_price": 0.0,
-  "order_status": "IDLE",
+  "order_status": "CLOSED_MOC",
   "order_id": null,
-  "last_updated": "2026-09-22T15:37:24.947140"
+  "last_updated": "2026-09-22T20:00:59.307038"
 }
