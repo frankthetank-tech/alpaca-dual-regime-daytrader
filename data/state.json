@@ -1,15 +1,15 @@
 {
   "date": "2026-09-23",
   "macro_regime": "BULLISH",
-  "spy_0945": 773.44,
-  "spy_sma50": 760.0686000000001,
-  "spy_sma200": 716.7099249999999,
-  "selected_candidate": null,
-  "direction": null,
-  "entry_stop_price": 0.0,
-  "stop_loss_price": 0.0,
-  "take_profit_price": 0.0,
-  "order_status": "NO_SETUP",
-  "order_id": null,
-  "last_updated": "2026-09-23T00:53:46.183933"
+  "spy_0945": 770.86,
+  "spy_sma50": 760.5548000000001,
+  "spy_sma200": 717.1580749999999,
+  "selected_candidate": "META",
+  "direction": "LONG",
+  "entry_stop_price": 758.3,
+  "stop_loss_price": 749.2004,
+  "take_profit_price": 784.8404999999999,
+  "order_status": "SUBMITTED",
+  "order_id": "4d1f0728-8601-46fa-8a49-fbfd1b90ad68",
+  "last_updated": "2026-09-23T13:54:02.843002"
 }
