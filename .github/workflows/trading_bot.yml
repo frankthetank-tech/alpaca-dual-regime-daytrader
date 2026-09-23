@@ -50,7 +50,7 @@ jobs:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           ALPACA_PAPER: 'True'
-          ALPACA_DATA_FEED: 'sip'
+          ALPACA_DATA_FEED: 'iex'
         run: |
           ACTION="${{ github.event.inputs.action }}"
           
