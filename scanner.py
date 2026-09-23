@@ -1,6 +1,7 @@
 """
 Strategy #3: Scanner & Signal Engine
 Evaluates 09:45 AM Dual-Regime Macro Shield and Ranks Long Leaders / Short Laggards
+Equipped with Automatic Feed Failover (IEX / SIP) to Prevent 403 Forbidden Errors
 """
 
 import logging
@@ -10,6 +11,7 @@ import numpy as np
 from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockBarsRequest
 from alpaca.data.timeframe import TimeFrame
+from alpaca.data.enums import DataFeed
 
 import config
 import state_manager
@@ -18,6 +20,34 @@ logger = logging.getLogger("DualRegime.Scanner")
 
 def get_data_client():
     return StockHistoricalDataClient(config.ALPACA_API_KEY, config.ALPACA_SECRET_KEY)
+
+def get_stock_bars_safe(client, symbol_or_symbols, timeframe, start, end):
+    """
+    Fetches stock bars with automatic failover between IEX and SIP feeds.
+    Free paper accounts are restricted to IEX during regular market hours,
+    which causes 403 Forbidden if SIP is queried directly.
+    """
+    primary_feed = DataFeed.SIP if str(config.DATA_FEED).lower() == "sip" else DataFeed.IEX
+    fallback_feed = DataFeed.IEX if primary_feed == DataFeed.SIP else DataFeed.SIP
+    feeds_to_try = [primary_feed, fallback_feed]
+
+    for feed in feeds_to_try:
+        try:
+            req = StockBarsRequest(
+                symbol_or_symbols=symbol_or_symbols,
+                timeframe=timeframe,
+                start=start,
+                end=end,
+                feed=feed
+            )
+            bars = client.get_stock_bars(req)
+            if not bars.df.empty:
+                return bars.df
+        except Exception as e:
+            logger.warning(f"Data feed {feed.name} failed for {symbol_or_symbols}: {e}. Retrying fallback...")
+
+    # Return empty DataFrame if all feeds fail
+    return pd.DataFrame()
 
 def evaluate_macro_shield():
     """
@@ -30,14 +60,10 @@ def evaluate_macro_shield():
     start_daily = now - timedelta(days=350)
     
     # 1. Fetch SPY Daily Bars for SMA50 and SMA200
-    req_daily = StockBarsRequest(
-        symbol_or_symbols="SPY",
-        timeframe=TimeFrame.Day,
-        start=start_daily,
-        end=now,
-        feed=config.DATA_FEED
-    )
-    bars_daily = client.get_stock_bars(req_daily).df
+    bars_daily = get_stock_bars_safe(client, "SPY", TimeFrame.Day, start_daily, now)
+    if bars_daily.empty:
+        raise RuntimeError("Failed to fetch SPY daily bars from Alpaca.")
+
     if isinstance(bars_daily.index, pd.MultiIndex):
         spy_daily = bars_daily.xs("SPY", level=0).sort_index()
     else:
@@ -50,22 +76,16 @@ def evaluate_macro_shield():
 
     # 2. Fetch SPY Intraday Minute Bars up to 09:45 AM
     today_open = now.replace(hour=9, minute=30, second=0, microsecond=0)
-    cutoff_0945 = now.replace(hour=9, minute=45, second=0, microsecond=0)
+    bars_1m = get_stock_bars_safe(client, "SPY", TimeFrame.Minute, today_open - timedelta(minutes=10), now)
     
-    req_1m = StockBarsRequest(
-        symbol_or_symbols="SPY",
-        timeframe=TimeFrame.Minute,
-        start=today_open - timedelta(minutes=10),
-        end=now,
-        feed=config.DATA_FEED
-    )
-    bars_1m = client.get_stock_bars(req_1m).df
-    if isinstance(bars_1m.index, pd.MultiIndex):
-        spy_1m = bars_1m.xs("SPY", level=0).sort_index()
+    if not bars_1m.empty:
+        if isinstance(bars_1m.index, pd.MultiIndex):
+            spy_1m = bars_1m.xs("SPY", level=0).sort_index()
+        else:
+            spy_1m = bars_1m.sort_index()
+        spy_0945 = float(spy_1m["close"].iloc[-1])
     else:
-        spy_1m = bars_1m.sort_index()
-
-    spy_0945 = float(spy_1m["close"].iloc[-1]) if len(spy_1m) > 0 else float(spy_daily["close"].iloc[-1])
+        spy_0945 = float(spy_daily["close"].iloc[-1])
 
     is_bull = (spy_0945 > sma200) and (spy_0945 > sma50)
     is_bear = (spy_0945 < sma200) or (spy_0945 < sma50)
@@ -103,14 +123,7 @@ def scan_candidates(macro_info):
             continue
         try:
             # 1. Daily bars for SMA50 and ATR
-            req_d = StockBarsRequest(
-                symbol_or_symbols=sym,
-                timeframe=TimeFrame.Day,
-                start=start_daily,
-                end=now,
-                feed=config.DATA_FEED
-            )
-            d_df = client.get_stock_bars(req_d).df
+            d_df = get_stock_bars_safe(client, sym, TimeFrame.Day, start_daily, now)
             if d_df.empty:
                 continue
             if isinstance(d_df.index, pd.MultiIndex):
@@ -137,14 +150,7 @@ def scan_candidates(macro_info):
                 continue
 
             # 2. Intraday 15-min bars (09:30 - 09:45 AM)
-            req_m = StockBarsRequest(
-                symbol_or_symbols=sym,
-                timeframe=TimeFrame.Minute,
-                start=today_open - timedelta(minutes=5),
-                end=now,
-                feed=config.DATA_FEED
-            )
-            m_df = client.get_stock_bars(req_m).df
+            m_df = get_stock_bars_safe(client, sym, TimeFrame.Minute, today_open - timedelta(minutes=5), now)
             if m_df.empty:
                 continue
             if isinstance(m_df.index, pd.MultiIndex):
