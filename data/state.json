@@ -1,15 +1,15 @@
 {
-  "date": "2026-09-23",
+  "date": "2026-09-24",
   "macro_regime": "BULLISH",
-  "spy_0945": 770.86,
-  "spy_sma50": 760.5548000000001,
-  "spy_sma200": 717.1580749999999,
-  "selected_candidate": "META",
+  "spy_0945": 764.93,
+  "spy_sma50": 760.8746000000001,
+  "spy_sma200": 717.57525,
+  "selected_candidate": "TGT",
   "direction": "LONG",
-  "entry_stop_price": 758.3,
-  "stop_loss_price": 749.2004,
-  "take_profit_price": 784.8404999999999,
-  "order_status": "CLOSED_MOC",
-  "order_id": "4d1f0728-8601-46fa-8a49-fbfd1b90ad68",
-  "last_updated": "2026-09-23T20:01:01.836713"
+  "entry_stop_price": 159.555,
+  "stop_loss_price": 157.64034,
+  "take_profit_price": 165.139425,
+  "order_status": "SUBMITTED",
+  "order_id": "20a657fe-b31b-4d0f-b078-751892ef1dd4",
+  "last_updated": "2026-09-24T13:56:24.029591"
 }
