@@ -9,7 +9,7 @@
   "entry_stop_price": 638.79,
   "stop_loss_price": 631.12452,
   "take_profit_price": 661.1476499999999,
-  "order_status": "EXPIRED",
+  "order_status": "CLOSED_MOC",
   "order_id": "f988f797-ea00-47b8-9822-a561d7ffb453",
-  "last_updated": "2026-09-25T15:38:00.903520"
+  "last_updated": "2026-09-25T20:00:54.053621"
 }
