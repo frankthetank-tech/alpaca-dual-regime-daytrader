@@ -15,11 +15,8 @@ import config
 import state_manager
 import scanner
 import executor
+import audit_logger
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s - %(message)s"
-)
 logger = logging.getLogger("DualRegime.Main")
 
 def sync_to_target_time(target_hour_utc=13, target_minute_utc=45, target_second_utc=0):
@@ -38,6 +35,11 @@ def sync_to_target_time(target_hour_utc=13, target_minute_utc=45, target_second_
     remaining = (target - now).total_seconds()
     if remaining <= 0:
         logger.info(f"Target timestamp ({target.strftime('%H:%M:%S')} UTC) already reached. Executing immediately.")
+        audit_logger.record_event("COUNTDOWN_SYNC", {
+            "target": target.strftime('%H:%M:%S UTC'),
+            "awaken_utc": now.strftime('%H:%M:%S.%f')[:-3],
+            "drift_ms": abs(remaining) * 1000.0
+        })
         return
 
     logger.info(f"Synchronizing to target execution time {target.strftime('%H:%M:%S')} UTC (09:45:00 AM EDT sharp). Remaining: {remaining:.1f}s")
@@ -54,7 +56,13 @@ def sync_to_target_time(target_hour_utc=13, target_minute_utc=45, target_second_
         time.sleep(0.002)
 
     awakened = datetime.now(timezone.utc)
-    logger.info(f"TARGET TIME REACHED! Awakened at {awakened.strftime('%H:%M:%S.%f')[:-3]} UTC. Triggering scan...")
+    drift_ms = (awakened - target).total_seconds() * 1000.0
+    logger.info(f"TARGET TIME REACHED! Awakened at {awakened.strftime('%H:%M:%S.%f')[:-3]} UTC (Drift: {drift_ms:+.2f} ms). Triggering scan...")
+    audit_logger.record_event("COUNTDOWN_SYNC", {
+        "target": target.strftime('%H:%M:%S UTC'),
+        "awaken_utc": awakened.strftime('%H:%M:%S.%f')[:-3],
+        "drift_ms": drift_ms
+    })
 
 def show_status():
     print("=" * 80)
@@ -104,17 +112,29 @@ def main():
     parser.add_argument("--warmup", action="store_true", help="Run 09:40 AM pre-market warmup, pre-fetch daily metrics, and sync to 09:45:00 AM sharp")
     parser.add_argument("--scan", action="store_true", help="Run 09:45 AM scan and multi-order placement directly")
     parser.add_argument("--cutoff", action="store_true", help="Run 11:30 AM order cutoff to cancel unfilled entries")
-    parser.add_argument("--moc", action="store_true", help="Run 15:55 PM Market-on-Close liquidation (100% flat)")
+    parser.add_argument("--moc", action="store_true", help="Run 15:55 PM Market-on-Close liquidation (100%% flat)")
     parser.add_argument("--status", action="store_true", help="Display current account and strategy status")
     parser.add_argument("--dry-run", action="store_true", help="Dry run without submitting real orders")
     parser.add_argument("--test", action="store_true", help="Test connection and credentials")
+    parser.add_argument("--audit", action="store_true", help="Display execution audit report, decision timeline, and logs")
+    parser.add_argument("--date", type=str, default=None, help="Target date for audit report (YYYY-MM-DD)")
+    parser.add_argument("--summary", action="store_true", help="Display cumulative historical daily performance summary table")
     
     args = parser.parse_args()
     
-    if args.status or args.test:
+    # Initialize daily dedicated log file handler
+    audit_logger.setup_logging(date_str=args.date)
+
+    if args.audit or args.summary:
+        audit_logger.show_audit_report(date_str=args.date, show_summary=args.summary)
+    elif args.status or args.test:
         show_status()
     elif args.warmup:
         logger.info("Initializing 09:40 AM Pre-Market Warmup Cycle...")
+        audit_logger.record_event("WARMUP_INIT", {
+            "boot_time": datetime.now(timezone.utc).isoformat(),
+            "dry_run": args.dry_run
+        })
         # 1. Pre-fetch daily bars during warmup window (0 market seconds)
         daily_cache = scanner.fetch_daily_metrics_batch(config.UNIVERSE)
         # 2. Synchronize to 09:45:00 AM EDT (13:45:00 UTC) sharp

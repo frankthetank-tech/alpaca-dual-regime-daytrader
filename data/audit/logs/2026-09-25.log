@@ -1,0 +1,58 @@
+2026-09-25 19:15:50 [INFO] [DualRegime.Audit] Initialized daily audit logging -> C:\Users\frank\.gemini\antigravity\scratch\alpaca_dual_regime_daytrader\data\audit\logs\2026-09-25.log
+2026-09-25 19:15:51 [INFO] [DualRegime.Scanner] SPY 09:45: $769.37 | SMA50: $761.12 | SMA200: $717.98 => REGIME: BULLISH
+2026-09-25 19:15:51 [INFO] [DualRegime.Scanner] Pre-fetching daily metrics for 500 tickers in vectorized batch (IEX)...
+2026-09-25 19:15:55 [INFO] [DualRegime.Scanner] Daily metrics pre-computed for 500 valid symbols.
+2026-09-25 19:15:55 [INFO] [DualRegime.Scanner] Pulling 15m intraday bars for 500 tickers in vectorized batch (IEX)...
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner] Intraday 15m bars retrieved for 473 symbols.
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner] Screening cross-section for BULLISH setups...
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner] Total fully qualified BULLISH candidates found: 28
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #1: VTRS  | Share Price: $  17.55 | Score: 0.0038 | RVOL: 2.22x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #2: FSLY  | Share Price: $  28.16 | Score: 0.0332 | RVOL: 1.27x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #3: CLOU  | Share Price: $  29.15 | Score: 0.0096 | RVOL: 1.55x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #4: SMCI  | Share Price: $  43.38 | Score: 0.0396 | RVOL: 2.32x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #5: HOOD  | Share Price: $ 121.84 | Score: 0.0029 | RVOL: 1.36x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #6: JCI   | Share Price: $ 149.66 | Score: 0.0430 | RVOL: 2.81x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #7: GLW   | Share Price: $ 157.31 | Score: 0.0181 | RVOL: 1.36x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #8: EWY   | Share Price: $ 186.34 | Score: 0.0225 | RVOL: 2.29x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #9: XLK   | Share Price: $ 196.74 | Score: 0.0069 | RVOL: 1.39x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #10: QCOM  | Share Price: $ 200.59 | Score: 0.0262 | RVOL: 4.83x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #11: IBB   | Share Price: $ 210.00 | Score: 0.0032 | RVOL: 1.83x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #12: ANET  | Share Price: $ 211.79 | Score: 0.0867 | RVOL: 3.80x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #13: MRVL  | Share Price: $ 264.71 | Score: 0.0161 | RVOL: 1.51x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #14: DDOG  | Share Price: $ 277.99 | Score: 0.1605 | RVOL: 6.35x
+2026-09-25 19:15:56 [INFO] [DualRegime.Scanner]    Candidate #15: LRCX  | Share Price: $ 312.72 | Score: 0.0403 | RVOL: 2.61x
+2026-09-25 19:15:56 [INFO] [DualRegime.State] State saved successfully to C:\Users\frank\.gemini\antigravity\scratch\alpaca_dual_regime_daytrader\data\state.json
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] Beginning Multi-Order Placement | Available Cash: $9,877.42 | Qualified Candidates: 28 | Max Positions: 50 | Throttle: 6.0 orders/sec
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [1/28] Submitting LONG Bracket: 1 share of VTRS @ Stop: $17.55 | SL: $17.34 (-1.2%) | TP: $18.16 (+3.5%) | Remaining Cash: $9859.87
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [2/28] Submitting LONG Bracket: 1 share of FSLY @ Stop: $28.16 | SL: $27.82 (-1.2%) | TP: $29.15 (+3.5%) | Remaining Cash: $9831.71
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [3/28] Submitting LONG Bracket: 1 share of CLOU @ Stop: $29.15 | SL: $28.80 (-1.2%) | TP: $30.17 (+3.5%) | Remaining Cash: $9802.56
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [4/28] Submitting LONG Bracket: 1 share of SMCI @ Stop: $43.38 | SL: $42.86 (-1.2%) | TP: $44.90 (+3.5%) | Remaining Cash: $9759.18
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [5/28] Submitting LONG Bracket: 1 share of HOOD @ Stop: $121.84 | SL: $120.38 (-1.2%) | TP: $126.10 (+3.5%) | Remaining Cash: $9637.34
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [6/28] Submitting LONG Bracket: 1 share of JCI @ Stop: $149.66 | SL: $147.86 (-1.2%) | TP: $154.90 (+3.5%) | Remaining Cash: $9487.68
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [7/28] Submitting LONG Bracket: 1 share of GLW @ Stop: $157.31 | SL: $155.42 (-1.2%) | TP: $162.82 (+3.5%) | Remaining Cash: $9330.37
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [8/28] Submitting LONG Bracket: 1 share of EWY @ Stop: $186.34 | SL: $184.10 (-1.2%) | TP: $192.86 (+3.5%) | Remaining Cash: $9144.03
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [9/28] Submitting LONG Bracket: 1 share of XLK @ Stop: $196.74 | SL: $194.38 (-1.2%) | TP: $203.63 (+3.5%) | Remaining Cash: $8947.29
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [10/28] Submitting LONG Bracket: 1 share of QCOM @ Stop: $200.59 | SL: $198.18 (-1.2%) | TP: $207.61 (+3.5%) | Remaining Cash: $8746.70
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [11/28] Submitting LONG Bracket: 1 share of IBB @ Stop: $210.00 | SL: $207.48 (-1.2%) | TP: $217.35 (+3.5%) | Remaining Cash: $8536.70
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [12/28] Submitting LONG Bracket: 1 share of ANET @ Stop: $211.79 | SL: $209.25 (-1.2%) | TP: $219.20 (+3.5%) | Remaining Cash: $8324.91
+2026-09-25 19:15:56 [INFO] [DualRegime.Executor] [13/28] Submitting LONG Bracket: 1 share of MRVL @ Stop: $264.71 | SL: $261.53 (-1.2%) | TP: $273.97 (+3.5%) | Remaining Cash: $8060.20
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [14/28] Submitting LONG Bracket: 1 share of DDOG @ Stop: $277.99 | SL: $274.65 (-1.2%) | TP: $287.72 (+3.5%) | Remaining Cash: $7782.21
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [15/28] Submitting LONG Bracket: 1 share of LRCX @ Stop: $312.72 | SL: $308.97 (-1.2%) | TP: $323.67 (+3.5%) | Remaining Cash: $7469.49
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [16/28] Submitting LONG Bracket: 1 share of ARM @ Stop: $322.56 | SL: $318.69 (-1.2%) | TP: $333.85 (+3.5%) | Remaining Cash: $7146.93
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [17/28] Submitting LONG Bracket: 1 share of CDNS @ Stop: $329.98 | SL: $326.02 (-1.2%) | TP: $341.53 (+3.5%) | Remaining Cash: $6816.95
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [18/28] Submitting LONG Bracket: 1 share of NET @ Stop: $363.68 | SL: $359.32 (-1.2%) | TP: $376.41 (+3.5%) | Remaining Cash: $6453.27
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [19/28] Submitting LONG Bracket: 1 share of TSLA @ Stop: $386.67 | SL: $382.03 (-1.2%) | TP: $400.20 (+3.5%) | Remaining Cash: $6066.60
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [20/28] Submitting LONG Bracket: 1 share of HUM @ Stop: $395.28 | SL: $390.54 (-1.2%) | TP: $409.11 (+3.5%) | Remaining Cash: $5671.32
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [21/28] Submitting LONG Bracket: 1 share of SNPS @ Stop: $444.88 | SL: $439.54 (-1.2%) | TP: $460.45 (+3.5%) | Remaining Cash: $5226.44
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [22/28] Submitting LONG Bracket: 1 share of DELL @ Stop: $560.30 | SL: $553.58 (-1.2%) | TP: $579.91 (+3.5%) | Remaining Cash: $4666.14
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [23/28] Submitting LONG Bracket: 1 share of SOXX @ Stop: $573.40 | SL: $566.52 (-1.2%) | TP: $593.47 (+3.5%) | Remaining Cash: $4092.74
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [24/28] Submitting LONG Bracket: 1 share of SMH @ Stop: $607.97 | SL: $600.67 (-1.2%) | TP: $629.25 (+3.5%) | Remaining Cash: $3484.77
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [25/28] Submitting LONG Bracket: 1 share of AMD @ Stop: $637.64 | SL: $629.99 (-1.2%) | TP: $659.96 (+3.5%) | Remaining Cash: $2847.13
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [26/28] Submitting LONG Bracket: 1 share of PWR @ Stop: $651.40 | SL: $643.58 (-1.2%) | TP: $674.20 (+3.5%) | Remaining Cash: $2195.73
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [27/28] Submitting LONG Bracket: 1 share of STX @ Stop: $922.47 | SL: $911.40 (-1.2%) | TP: $954.76 (+3.5%) | Remaining Cash: $1273.26
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] [28/28] Submitting LONG Bracket: 1 share of MU @ Stop: $1108.57 | SL: $1095.27 (-1.2%) | TP: $1147.37 (+3.5%) | Remaining Cash: $164.69
+2026-09-25 19:15:57 [INFO] [DualRegime.Executor] Multi-Order Submission Complete! Placed 28 orders. Total Capital Committed: $9,712.73 | Remaining Cash Reserve: $164.69
+2026-09-25 19:15:57 [INFO] [DualRegime.State] State saved successfully to C:\Users\frank\.gemini\antigravity\scratch\alpaca_dual_regime_daytrader\data\state.json
+2026-09-25 19:16:05 [INFO] [DualRegime.Audit] Initialized daily audit logging -> C:\Users\frank\.gemini\antigravity\scratch\alpaca_dual_regime_daytrader\data\audit\logs\2026-09-25.log
+2026-09-25 19:16:18 [INFO] [DualRegime.Audit] Initialized daily audit logging -> C:\Users\frank\.gemini\antigravity\scratch\alpaca_dual_regime_daytrader\data\audit\logs\2026-09-25.log
+2026-09-25 19:16:23 [INFO] [DualRegime.Audit] Initialized daily audit logging -> C:\Users\frank\.gemini\antigravity\scratch\alpaca_dual_regime_daytrader\data\audit\logs\2026-09-25.log

@@ -316,11 +316,14 @@ def scan_all_candidates(macro_info, daily_cache=None):
     return qualified_candidates
 
 def run_scan(daily_cache=None):
+    import audit_logger
+
     state = state_manager.load_state()
     macro = evaluate_macro_shield()
     candidates = scan_all_candidates(macro, daily_cache=daily_cache)
 
-    state["date"] = datetime.now(NY_TZ).strftime("%Y-%m-%d")
+    date_str = datetime.now(NY_TZ).strftime("%Y-%m-%d")
+    state["date"] = date_str
     state["macro_regime"] = macro["regime"]
     state["spy_0945"] = macro["spy_0945"]
     state["spy_sma50"] = macro["sma50"]
@@ -342,4 +345,42 @@ def run_scan(daily_cache=None):
         state["order_status"] = "NO_SETUP"
 
     state_manager.save_state(state)
+
+    # Record structured audit event & summary
+    audit_logger.record_event("SCAN_COMPLETE", {
+        "date": date_str,
+        "screened_count": len(config.UNIVERSE),
+        "macro_regime": macro["regime"],
+        "spy_price": macro["spy_0945"],
+        "spy_sma50": macro["sma50"],
+        "spy_sma200": macro["sma200"],
+        "qualified_count": len(candidates),
+        "qualified_candidates": [
+            {
+                "rank": idx + 1,
+                "symbol": c["symbol"],
+                "direction": c["direction"],
+                "entry_stop": c["entry_stop"],
+                "stop_loss": c["stop_loss"],
+                "take_profit": c["take_profit"],
+                "gap_pct": c["gap_pct"],
+                "rvol15": c["rvol_15"],
+                "atr_pct": c["atr_pct"],
+                "score": c["score"]
+            }
+            for idx, c in enumerate(candidates[:config.MAX_POSITIONS])
+        ]
+    })
+
+    audit_logger.update_daily_summary({
+        "date": date_str,
+        "macro_regime": macro["regime"],
+        "spy_0945": macro["spy_0945"],
+        "spy_sma50": macro["sma50"],
+        "spy_sma200": macro["sma200"],
+        "screened_count": len(config.UNIVERSE),
+        "qualified_count": len(candidates),
+        "status": state["order_status"]
+    })
+
     return candidates

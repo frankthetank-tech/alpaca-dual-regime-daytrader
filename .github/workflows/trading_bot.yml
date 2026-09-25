@@ -87,9 +87,9 @@ jobs:
             python main.py --status
           fi
 
-      - name: Commit Strategy State Updates
+      - name: Commit Strategy State & Audit Logs
         run: |
           git config --global user.name "Strategy 3 Cloud Bot"
           git config --global user.email "bot@antigravity.system"
-          git add data/state.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update Strategy #3 state [skip ci]" && git push)
+          git add data/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update Strategy #3 audit logs and state [skip ci]" && git push)

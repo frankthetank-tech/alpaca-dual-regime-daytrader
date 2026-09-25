@@ -19,6 +19,7 @@ from alpaca.trading.requests import (
 
 import config
 import state_manager
+import audit_logger
 
 logger = logging.getLogger("DualRegime.Executor")
 
@@ -68,6 +69,12 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
                 f"Candidate #{i} ({sym} @ ${stop_price:.2f}) exceeds remaining cash (${remaining_cash:.2f}). "
                 f"Since candidates are sorted by price ascending, halting submissions."
             )
+            audit_logger.record_event("ORDER_SKIPPED", {
+                "symbol": sym,
+                "price": stop_price,
+                "remaining_cash": remaining_cash,
+                "reason": "exceeds_remaining_cash"
+            })
             break
 
         qty = config.ORDER_QTY  # Strictly 1 full share
@@ -87,6 +94,17 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
                 "direction": direction
             })
             remaining_cash -= stop_price
+            audit_logger.record_event("ORDER_SUBMITTED", {
+                "index": len(orders_submitted),
+                "symbol": sym,
+                "direction": direction,
+                "qty": qty,
+                "stop_price": stop_price,
+                "sl": stop_loss_px,
+                "tp": take_profit_px,
+                "order_id": f"dry-run-{sym}",
+                "remaining_cash": remaining_cash
+            })
             time.sleep(0.01)
             continue
 
@@ -112,11 +130,27 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
             remaining_cash -= stop_price
             logger.info(f"   -> Accepted by Alpaca matching engine! Order ID: {order.id}")
 
+            audit_logger.record_event("ORDER_SUBMITTED", {
+                "index": len(orders_submitted),
+                "symbol": sym,
+                "direction": direction,
+                "qty": qty,
+                "stop_price": stop_price,
+                "sl": stop_loss_px,
+                "tp": take_profit_px,
+                "order_id": str(order.id),
+                "remaining_cash": remaining_cash
+            })
+
             # Throttling delay to guarantee compliance with 10 req/s burst limit
             time.sleep(throttle_sleep)
 
         except Exception as e:
             logger.error(f"Failed to submit bracket order for {sym}: {e}")
+            audit_logger.record_event("ORDER_ERROR", {
+                "symbol": sym,
+                "error": str(e)
+            })
             # Still sleep to prevent burst on errors
             time.sleep(throttle_sleep)
 
@@ -131,6 +165,17 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
     state["active_orders"] = orders_submitted
     state["capital_committed"] = total_committed
     state_manager.save_state(state)
+
+    audit_logger.record_event("ORDER_BATCH_COMPLETE", {
+        "orders_placed": len(orders_submitted),
+        "capital_committed": total_committed,
+        "remaining_cash": remaining_cash
+    })
+    audit_logger.update_daily_summary({
+        "orders_placed": len(orders_submitted),
+        "capital_committed": total_committed,
+        "status": state["order_status"]
+    })
 
     return orders_submitted
 
@@ -155,6 +200,14 @@ def cancel_unfilled_entries():
         state["order_status"] = "EXPIRED" if cancelled_count > 0 else state.get("order_status")
         state_manager.save_state(state)
         logger.info(f"11:30 AM Cutoff check complete. Cancelled {cancelled_count} unfilled orders.")
+
+        audit_logger.record_event("CUTOFF_1130", {
+            "cancelled_count": cancelled_count
+        })
+        audit_logger.update_daily_summary({
+            "cancelled_cutoff": cancelled_count,
+            "status": state["order_status"]
+        })
     except Exception as e:
         logger.error(f"Error during 11:30 AM order cutoff: {e}")
 
@@ -178,5 +231,13 @@ def market_on_close_liquidation():
 
         state["order_status"] = "CLOSED_MOC"
         state_manager.save_state(state)
+
+        audit_logger.record_event("MOC_LIQUIDATION", {
+            "closed_count": len(closed_positions)
+        })
+        audit_logger.update_daily_summary({
+            "closed_moc": len(closed_positions),
+            "status": state["order_status"]
+        })
     except Exception as e:
         logger.error(f"Error during MOC liquidation: {e}")
