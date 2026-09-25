@@ -1,9 +1,11 @@
 """
 Strategy #3: Order Execution Engine
-Places Native Alpaca Bracket Stop Orders, Manages 11:30 AM Expiry, & 15:55 PM MOC Liquidation
+Single Full-Share Multi-Order Execution Engine with 6 Orders/Sec Throttling
+Places Native Alpaca Bracket Orders (qty=1), Manages 11:30 AM Cutoff & 15:55 PM MOC Liquidation
 """
 
 import math
+import time
 import logging
 from alpaca.trading.client import TradingClient
 from alpaca.trading.requests import (
@@ -23,71 +25,119 @@ logger = logging.getLogger("DualRegime.Executor")
 def get_trading_client():
     return TradingClient(config.ALPACA_API_KEY, config.ALPACA_SECRET_KEY, paper=config.ALPACA_PAPER)
 
-def submit_entry_bracket(candidate, dry_run=False):
+def submit_entry_brackets_multi(candidates, dry_run=False):
     """
-    Submits a native bracket stop order to Alpaca matching engine.
-    - Long: Buy-Stop at OR15_High with Stop (-1.2%) and Limit (+3.5%)
-    - Short: Sell-Stop at OR15_Low with Stop (+1.2%) and Limit (-3.5%)
+    Submits native bracket stop orders for 1 full share (qty=1) across the maximum
+    quantity of qualified tickers possible with the available cash balance (capped at MAX_POSITIONS).
+    Throttled at ORDER_THROTTLE_RATE (6 orders per second) to stay well under Alpaca rate limits.
     """
-    if not candidate:
-        logger.info("No candidate provided to execute.")
-        return None
+    if not candidates:
+        logger.info("No qualified candidates provided to execute.")
+        return []
 
     client = get_trading_client()
     account = client.get_account()
-    equity = float(account.equity)
-    cash = float(account.cash)
-
-    alloc_dollars = min(equity, cash) * config.MAX_ALLOCATION_PCT
-    entry_price = candidate["entry_stop"]
-    
-    # Calculate integer shares
-    qty = math.floor(alloc_dollars / entry_price)
-    if qty <= 0:
-        logger.warning(f"Calculated quantity is 0 for {candidate['symbol']} at ${entry_price:.2f}. Insufficient capital.")
-        return None
-
-    side = OrderSide.BUY if candidate["direction"] == "LONG" else OrderSide.SELL
-    stop_price = round(candidate["entry_stop"], 2)
-    stop_loss_px = round(candidate["stop_loss"], 2)
-    take_profit_px = round(candidate["take_profit"], 2)
+    cash = float(account.cash) * config.MAX_ALLOCATION_PCT
+    remaining_cash = cash
 
     logger.info(
-        f"Preparing {candidate['direction']} Bracket Order: {qty} shares of {candidate['symbol']} "
-        f"@ Stop Trigger: ${stop_price:.2f} | Stop Loss: ${stop_loss_px:.2f} | Take Profit: ${take_profit_px:.2f}"
+        f"Beginning Multi-Order Placement | Available Cash: ${cash:,.2f} | "
+        f"Qualified Candidates: {len(candidates)} | Max Positions: {config.MAX_POSITIONS} | "
+        f"Throttle: {config.ORDER_THROTTLE_RATE} orders/sec"
     )
 
-    if dry_run:
-        logger.info("[DRY-RUN] Bracket order simulated successfully. No live order submitted.")
-        return {"id": "dry-run-order", "symbol": candidate["symbol"], "qty": qty}
+    orders_submitted = []
+    throttle_sleep = 1.0 / float(config.ORDER_THROTTLE_RATE)
 
-    try:
-        req = StopOrderRequest(
-            symbol=candidate["symbol"],
-            qty=qty,
-            side=side,
-            time_in_force=TimeInForce.DAY,
-            stop_price=stop_price,
-            order_class=OrderClass.BRACKET,
-            take_profit=TakeProfitRequest(limit_price=take_profit_px),
-            stop_loss=StopLossRequest(stop_price=stop_loss_px)
+    for i, candidate in enumerate(candidates, start=1):
+        if len(orders_submitted) >= config.MAX_POSITIONS:
+            logger.info(f"Reached MAX_POSITIONS cap ({config.MAX_POSITIONS} orders). Halting order submissions.")
+            break
+
+        sym = candidate["symbol"]
+        entry_price = candidate["entry_stop"]
+        direction = candidate["direction"]
+        side = OrderSide.BUY if direction == "LONG" else OrderSide.SELL
+        stop_price = round(entry_price, 2)
+        stop_loss_px = round(candidate["stop_loss"], 2)
+        take_profit_px = round(candidate["take_profit"], 2)
+
+        # Check cash balance for 1 full share
+        if remaining_cash < stop_price:
+            logger.info(
+                f"Candidate #{i} ({sym} @ ${stop_price:.2f}) exceeds remaining cash (${remaining_cash:.2f}). "
+                f"Since candidates are sorted by price ascending, halting submissions."
+            )
+            break
+
+        qty = config.ORDER_QTY  # Strictly 1 full share
+
+        logger.info(
+            f"[{len(orders_submitted) + 1}/{min(len(candidates), config.MAX_POSITIONS)}] Submitting {direction} Bracket: "
+            f"{qty} share of {sym} @ Stop: ${stop_price:.2f} | SL: ${stop_loss_px:.2f} (-1.2%) | TP: ${take_profit_px:.2f} (+3.5%) | "
+            f"Remaining Cash: ${remaining_cash - stop_price:.2f}"
         )
-        order = client.submit_order(req)
-        logger.info(f"Bracket order submitted successfully! Order ID: {order.id}")
 
-        state = state_manager.load_state()
-        state["order_status"] = "SUBMITTED"
-        state["order_id"] = str(order.id)
-        state_manager.save_state(state)
-        return order
-    except Exception as e:
-        logger.error(f"Failed to submit bracket order: {e}")
-        return None
+        if dry_run:
+            orders_submitted.append({
+                "id": f"dry-run-{sym}",
+                "symbol": sym,
+                "qty": qty,
+                "price": stop_price,
+                "direction": direction
+            })
+            remaining_cash -= stop_price
+            time.sleep(0.01)
+            continue
+
+        try:
+            req = StopOrderRequest(
+                symbol=sym,
+                qty=qty,
+                side=side,
+                time_in_force=TimeInForce.DAY,
+                stop_price=stop_price,
+                order_class=OrderClass.BRACKET,
+                take_profit=TakeProfitRequest(limit_price=take_profit_px),
+                stop_loss=StopLossRequest(stop_price=stop_loss_px)
+            )
+            order = client.submit_order(req)
+            orders_submitted.append({
+                "id": str(order.id),
+                "symbol": sym,
+                "qty": qty,
+                "price": stop_price,
+                "direction": direction
+            })
+            remaining_cash -= stop_price
+            logger.info(f"   -> Accepted by Alpaca matching engine! Order ID: {order.id}")
+
+            # Throttling delay to guarantee compliance with 10 req/s burst limit
+            time.sleep(throttle_sleep)
+
+        except Exception as e:
+            logger.error(f"Failed to submit bracket order for {sym}: {e}")
+            # Still sleep to prevent burst on errors
+            time.sleep(throttle_sleep)
+
+    total_committed = cash - remaining_cash
+    logger.info(
+        f"Multi-Order Submission Complete! Placed {len(orders_submitted)} orders. "
+        f"Total Capital Committed: ${total_committed:,.2f} | Remaining Cash Reserve: ${remaining_cash:,.2f}"
+    )
+
+    state = state_manager.load_state()
+    state["order_status"] = f"{len(orders_submitted)}_ORDERS_PLACED"
+    state["active_orders"] = orders_submitted
+    state["capital_committed"] = total_committed
+    state_manager.save_state(state)
+
+    return orders_submitted
 
 def cancel_unfilled_entries():
     """
     Called at 11:30 AM EST:
-    Cancels any resting unfilled entry stop orders so capital remains 100% cash.
+    Cancels any resting unfilled entry stop orders across all positions.
     """
     client = get_trading_client()
     state = state_manager.load_state()

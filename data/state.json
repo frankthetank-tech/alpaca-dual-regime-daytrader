@@ -1,15 +1,22 @@
 {
-  "date": "2026-09-25",
+  "date": "2026-09-24",
   "macro_regime": "BULLISH",
-  "spy_0945": 770.05,
-  "spy_sma50": 761.125,
-  "spy_sma200": 717.9836,
-  "selected_candidate": "AMD",
+  "spy_0945": 764.84,
+  "spy_sma50": 760.87,
+  "spy_sma200": 717.58,
+  "selected_candidate": "T",
   "direction": "LONG",
-  "entry_stop_price": 638.79,
-  "stop_loss_price": 631.12452,
-  "take_profit_price": 661.1476499999999,
-  "order_status": "CLOSED_MOC",
-  "order_id": "f988f797-ea00-47b8-9822-a561d7ffb453",
-  "last_updated": "2026-09-25T20:00:54.053621"
+  "entry_stop_price": 25.77,
+  "stop_loss_price": 25.46,
+  "take_profit_price": 26.67,
+  "order_status": "IDLE",
+  "order_id": null,
+  "last_updated": "2026-09-24T21:00:17",
+  "qualified_count": 18,
+  "qualified_candidates": [
+    "T", "EQNR", "RBLX", "KR", "XLE", "DIS", "WMT", "EWT", "USO", "DUOL", 
+    "TGT", "PM", "CVX", "PSX", "WST", "VLO", "VRTX", "MCK"
+  ],
+  "active_orders": [],
+  "capital_committed": 0.0
 }

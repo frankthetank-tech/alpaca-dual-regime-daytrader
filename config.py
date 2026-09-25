@@ -34,30 +34,21 @@ MIN_ATR_PCT = 0.015            # 20-day ATR% >= 1.5%
 MIN_RVOL_15 = 1.25             # First 15-minute RVOL >= 1.25x
 MIN_GAP_PCT = 0.003            # Gap magnitude >= 0.3%
 
+# Multi-Order Execution & Throttling
+MAX_POSITIONS = 50             # Cap at maximum 50 qualified positions
+ORDER_THROTTLE_RATE = 6.0      # 6 orders per second (0.167s interval between submissions)
+ORDER_QTY = 1                  # Strictly 1 full whole share per order
+
 # Schedule timings (Eastern Time)
+SCHEDULE_WARMUP_TIME = "09:40" # 09:40 AM EST: Boot runner & pre-fetch 90-day daily metrics
 SCHEDULE_SCAN_TIME = "09:45"   # 09:45 AM EST: Evaluate Macro Shield & submit conditional stop orders
 SCHEDULE_CUTOFF_TIME = "11:30" # 11:30 AM EST: Cancel unfilled entry stop orders
 SCHEDULE_MOC_TIME = "15:55"    # 15:55 PM EST: Liquidate all open positions (MOC exit)
 
 # ==========================================
-# 3. TRADABLE UNIVERSE (131 ASSETS - ZERO LEVERAGED ETFS)
+# 3. TRADABLE UNIVERSE (500 PREDEFINED ASSETS - ZERO LEVERAGED ETFS)
 # ==========================================
-# Liquid S&P 100 leaders and major sector ETFs (All 16 leveraged ETFs strictly excluded)
-UNIVERSE = [
-    # Mega-Cap Tech & Growth Leaders
-    "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "AVGO", "ADBE", "CRM",
-    "AMD", "INTC", "QCOM", "TXN", "AMAT", "MU", "NOW", "INTU", "NFLX", "PANW",
-    # Financials & Banks
-    "JPM", "BAC", "WFC", "C", "GS", "MS", "BLK", "AXP", "SPGI", "CB", "MMC", "PGR",
-    # Healthcare & Pharma
-    "LLY", "UNH", "JNJ", "ABBV", "MRK", "TMO", "ABT", "PFE", "DHR", "BMY", "AMGN", "GILD",
-    # Industrials, Defense & Aerospace
-    "CAT", "GE", "HON", "UNP", "UPS", "BA", "LMT", "RTX", "DE", "ETN", "WM", "FDX",
-    # Consumer & Retail
-    "WMT", "COST", "HD", "PG", "KO", "PEP", "MCD", "NKE", "SBUX", "TGT", "LOW", "TJX",
-    # Energy & Utilities
-    "XOM", "CVX", "COP", "SLB", "EOG", "NEE", "SO", "DUK", "CEG",
-    # Non-Leveraged Sector & Broad Benchmark ETFs
-    "SPY", "QQQ", "IWM", "DIA", "SMH", "XLE", "XLF", "XLK", "XLV", "XLI", 
-    "XLU", "XLP", "XLY", "XBI", "XME", "XRT", "XHB", "IYR", "IYT", "OIH"
-]
+from universe_500 import UNIVERSE_500
+
+# Ultra-diversified 500-ticker universe (116 liquid ETFs + 384 GICS equities)
+UNIVERSE = UNIVERSE_500

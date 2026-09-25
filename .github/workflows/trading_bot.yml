@@ -2,8 +2,8 @@ name: Strategy #3 Dual-Regime Long/Short Day Trading Bot
 
 on:
   schedule:
-    # 09:45 AM EDT = 13:45 UTC (Mon-Fri) -> Macro Shield Evaluation, Screening & Bracket Stop Order Placement
-    - cron: '45 13 * * 1-5'
+    # 09:40 AM EDT = 13:40 UTC (Mon-Fri) -> Early Boot, 90-Day Pre-fetch & 09:45:00 AM Precision Execution
+    - cron: '40 13 * * 1-5'
     # 11:30 AM EDT = 15:30 UTC (Mon-Fri) -> Cancel Unfilled Resting Entry Orders (Remain 100% Cash)
     - cron: '30 15 * * 1-5'
     # 03:55 PM EDT = 19:55 UTC (Mon-Fri) -> Market-on-Close (MOC) Liquidation (100% Cash Overnight)
@@ -17,6 +17,7 @@ on:
         type: choice
         options:
           - status
+          - warmup
           - scan
           - cutoff
           - moc
@@ -60,7 +61,7 @@ jobs:
             MINUTE=$(date -u +%M)
             echo "Cron triggered at UTC $HOUR:$MINUTE"
             if [ "$HOUR" -eq 13 ] || [ "$HOUR" -eq 14 ]; then
-              ACTION="scan"
+              ACTION="warmup"
             elif [ "$HOUR" -eq 15 ] || [ "$HOUR" -eq 16 ]; then
               ACTION="cutoff"
             else
@@ -72,6 +73,8 @@ jobs:
           
           if [ "$ACTION" = "status" ]; then
             python main.py --status
+          elif [ "$ACTION" = "warmup" ]; then
+            python main.py --warmup
           elif [ "$ACTION" = "scan" ]; then
             python main.py --scan
           elif [ "$ACTION" = "cutoff" ]; then
