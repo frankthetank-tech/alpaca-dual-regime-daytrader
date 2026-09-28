@@ -1,0 +1,42 @@
+2026-09-28 13:50:59 [INFO] [DualRegime.Audit] Initialized daily audit logging -> /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/audit/logs/2026-09-28.log
+2026-09-28 13:50:59 [INFO] [DualRegime.Main] Initializing 09:40 AM Pre-Market Warmup Cycle...
+2026-09-28 13:50:59 [INFO] [DualRegime.Scanner] Pre-fetching daily metrics for 500 tickers in vectorized batch (IEX)...
+2026-09-28 13:51:03 [INFO] [DualRegime.Scanner] Daily metrics pre-computed for 500 valid symbols.
+2026-09-28 13:51:03 [INFO] [DualRegime.Main] Target timestamp (13:45:00 UTC) already reached. Executing immediately.
+2026-09-28 13:51:04 [INFO] [DualRegime.Scanner] SPY 09:45: $767.58 | SMA50: $761.53 | SMA200: $718.42 => REGIME: BULLISH
+2026-09-28 13:51:04 [INFO] [DualRegime.Scanner] Using pre-cached daily metrics for 500 symbols.
+2026-09-28 13:51:04 [INFO] [DualRegime.Scanner] Pulling 15m intraday bars for 500 tickers in vectorized batch (IEX)...
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner] Intraday 15m bars retrieved for 480 symbols.
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner] Screening cross-section for BULLISH setups...
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner] Total fully qualified BULLISH candidates found: 9
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #1: EQNR  | Share Price: $  42.85 | Score: 0.0077 | RVOL: 1.26x
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #2: APA   | Share Price: $  43.35 | Score: 0.0092 | RVOL: 1.29x
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #3: KR    | Share Price: $  59.64 | Score: 0.0173 | RVOL: 3.13x
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #4: XLE   | Share Price: $  62.77 | Score: 0.0167 | RVOL: 2.88x
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #5: SHEL  | Share Price: $  97.42 | Score: 0.0153 | RVOL: 1.91x
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #6: XOM   | Share Price: $ 163.39 | Score: 0.0286 | RVOL: 1.51x
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #7: XOP   | Share Price: $ 183.53 | Score: 0.0077 | RVOL: 1.40x
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #8: COIN  | Share Price: $ 198.54 | Score: 0.0170 | RVOL: 1.77x
+2026-09-28 13:51:05 [INFO] [DualRegime.Scanner]    Candidate #9: NVDA  | Share Price: $ 233.20 | Score: 0.1734 | RVOL: 5.87x
+2026-09-28 13:51:05 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
+2026-09-28 13:51:06 [INFO] [DualRegime.Executor] Beginning Multi-Order Placement | Available Cash: $9,877.42 | Qualified Candidates: 9 | Max Positions: 50 | Throttle: 6.0 orders/sec
+2026-09-28 13:51:06 [INFO] [DualRegime.Executor] [1/9] Submitting LONG Bracket: 1 share of EQNR @ Stop: $42.85 | SL: $42.34 (-1.2%) | TP: $44.35 (+3.5%) | Remaining Cash: $9834.57
+2026-09-28 13:51:06 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 20dbb821-7a30-4ca3-9595-f81a3fd9e6e0
+2026-09-28 13:51:06 [INFO] [DualRegime.Executor] [2/9] Submitting LONG Bracket: 1 share of APA @ Stop: $43.35 | SL: $42.83 (-1.2%) | TP: $44.87 (+3.5%) | Remaining Cash: $9791.22
+2026-09-28 13:51:06 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 4f79f21a-8198-4060-9141-68a058659607
+2026-09-28 13:51:06 [INFO] [DualRegime.Executor] [3/9] Submitting LONG Bracket: 1 share of KR @ Stop: $59.64 | SL: $58.92 (-1.2%) | TP: $61.73 (+3.5%) | Remaining Cash: $9731.58
+2026-09-28 13:51:06 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: e467a165-b93b-477f-8619-f4d5f6a94352
+2026-09-28 13:51:06 [INFO] [DualRegime.Executor] [4/9] Submitting LONG Bracket: 1 share of XLE @ Stop: $62.77 | SL: $62.02 (-1.2%) | TP: $64.97 (+3.5%) | Remaining Cash: $9668.81
+2026-09-28 13:51:07 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: c839b2db-2494-43da-a201-242c748c4bd0
+2026-09-28 13:51:07 [INFO] [DualRegime.Executor] [5/9] Submitting LONG Bracket: 1 share of SHEL @ Stop: $97.42 | SL: $96.25 (-1.2%) | TP: $100.83 (+3.5%) | Remaining Cash: $9571.39
+2026-09-28 13:51:07 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 38527eaa-647d-4962-9a0d-89612da58e71
+2026-09-28 13:51:07 [INFO] [DualRegime.Executor] [6/9] Submitting LONG Bracket: 1 share of XOM @ Stop: $163.39 | SL: $161.43 (-1.2%) | TP: $169.11 (+3.5%) | Remaining Cash: $9408.00
+2026-09-28 13:51:07 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: f8755e9f-c139-46bd-80a4-a3d44d8da2f6
+2026-09-28 13:51:07 [INFO] [DualRegime.Executor] [7/9] Submitting LONG Bracket: 1 share of XOP @ Stop: $183.53 | SL: $181.33 (-1.2%) | TP: $189.95 (+3.5%) | Remaining Cash: $9224.47
+2026-09-28 13:51:07 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: d9b16091-40f9-4ad1-8e01-fc07a0c910e5
+2026-09-28 13:51:07 [INFO] [DualRegime.Executor] [8/9] Submitting LONG Bracket: 1 share of COIN @ Stop: $198.54 | SL: $196.16 (-1.2%) | TP: $205.49 (+3.5%) | Remaining Cash: $9025.93
+2026-09-28 13:51:08 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 1528fb21-24a6-4095-8e88-cf183dd63b5f
+2026-09-28 13:51:08 [INFO] [DualRegime.Executor] [9/9] Submitting LONG Bracket: 1 share of NVDA @ Stop: $233.20 | SL: $230.40 (-1.2%) | TP: $241.36 (+3.5%) | Remaining Cash: $8792.73
+2026-09-28 13:51:08 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: e845e498-085c-486a-90e9-b00ad1f03c0d
+2026-09-28 13:51:08 [INFO] [DualRegime.Executor] Multi-Order Submission Complete! Placed 9 orders. Total Capital Committed: $1,084.69 | Remaining Cash Reserve: $8,792.73
+2026-09-28 13:51:08 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json

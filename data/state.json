@@ -1,23 +1,93 @@
 {
-  "date": "2026-09-25",
+  "date": "2026-09-28",
   "macro_regime": "BULLISH",
-  "spy_0945": 769.365,
-  "spy_sma50": 761.125,
-  "spy_sma200": 717.9836,
-  "selected_candidate": "VTRS",
+  "spy_0945": 767.58,
+  "spy_sma50": 761.5346,
+  "spy_sma200": 718.42195,
+  "selected_candidate": "EQNR",
   "direction": "LONG",
-  "entry_stop_price": 17.55,
-  "stop_loss_price": 17.34,
-  "take_profit_price": 18.16,
-  "order_status": "IDLE",
+  "entry_stop_price": 42.85,
+  "stop_loss_price": 42.34,
+  "take_profit_price": 44.35,
+  "order_status": "9_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-09-25T19:15:57",
-  "qualified_count": 28,
+  "last_updated": "2026-09-28T13:51:08.427327",
+  "qualified_count": 9,
   "qualified_candidates": [
-    "VTRS", "FSLY", "CLOU", "SMCI", "HOOD", "JCI", "GLW", "EWY", "XLK", "QCOM",
-    "IBB", "ANET", "MRVL", "DDOG", "LRCX", "ARM", "CDNS", "NET", "TSLA", "HUM",
-    "SNPS", "DELL", "SOXX", "SMH", "AMD", "PWR", "STX", "MU"
+    "EQNR",
+    "APA",
+    "KR",
+    "XLE",
+    "SHEL",
+    "XOM",
+    "XOP",
+    "COIN",
+    "NVDA"
   ],
-  "active_orders": [],
-  "capital_committed": 0.0
+  "active_orders": [
+    {
+      "id": "20dbb821-7a30-4ca3-9595-f81a3fd9e6e0",
+      "symbol": "EQNR",
+      "qty": 1,
+      "price": 42.85,
+      "direction": "LONG"
+    },
+    {
+      "id": "4f79f21a-8198-4060-9141-68a058659607",
+      "symbol": "APA",
+      "qty": 1,
+      "price": 43.35,
+      "direction": "LONG"
+    },
+    {
+      "id": "e467a165-b93b-477f-8619-f4d5f6a94352",
+      "symbol": "KR",
+      "qty": 1,
+      "price": 59.64,
+      "direction": "LONG"
+    },
+    {
+      "id": "c839b2db-2494-43da-a201-242c748c4bd0",
+      "symbol": "XLE",
+      "qty": 1,
+      "price": 62.77,
+      "direction": "LONG"
+    },
+    {
+      "id": "38527eaa-647d-4962-9a0d-89612da58e71",
+      "symbol": "SHEL",
+      "qty": 1,
+      "price": 97.42,
+      "direction": "LONG"
+    },
+    {
+      "id": "f8755e9f-c139-46bd-80a4-a3d44d8da2f6",
+      "symbol": "XOM",
+      "qty": 1,
+      "price": 163.39,
+      "direction": "LONG"
+    },
+    {
+      "id": "d9b16091-40f9-4ad1-8e01-fc07a0c910e5",
+      "symbol": "XOP",
+      "qty": 1,
+      "price": 183.53,
+      "direction": "LONG"
+    },
+    {
+      "id": "1528fb21-24a6-4095-8e88-cf183dd63b5f",
+      "symbol": "COIN",
+      "qty": 1,
+      "price": 198.54,
+      "direction": "LONG"
+    },
+    {
+      "id": "e845e498-085c-486a-90e9-b00ad1f03c0d",
+      "symbol": "NVDA",
+      "qty": 1,
+      "price": 233.2,
+      "direction": "LONG"
+    }
+  ],
+  "capital_committed": 1084.6900000000023
 }
