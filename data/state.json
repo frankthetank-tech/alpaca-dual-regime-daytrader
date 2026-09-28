@@ -9,9 +9,9 @@
   "entry_stop_price": 42.85,
   "stop_loss_price": 42.34,
   "take_profit_price": 44.35,
-  "order_status": "9_ORDERS_PLACED",
+  "order_status": "EXPIRED",
   "order_id": null,
-  "last_updated": "2026-09-28T13:51:08.427327",
+  "last_updated": "2026-09-28T15:40:59.484780",
   "qualified_count": 9,
   "qualified_candidates": [
     "EQNR",

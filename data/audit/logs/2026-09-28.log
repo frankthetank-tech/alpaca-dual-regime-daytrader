@@ -40,3 +40,15 @@
 2026-09-28 13:51:08 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: e845e498-085c-486a-90e9-b00ad1f03c0d
 2026-09-28 13:51:08 [INFO] [DualRegime.Executor] Multi-Order Submission Complete! Placed 9 orders. Total Capital Committed: $1,084.69 | Remaining Cash Reserve: $8,792.73
 2026-09-28 13:51:08 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
+2026-09-28 15:40:58 [INFO] [DualRegime.Audit] Initialized daily audit logging -> /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/audit/logs/2026-09-28.log
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: c71eef47-ce6a-483d-80f8-c3ce0e6e02be (KR)
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: f141d01c-ca26-4561-a822-eaaaa953301d (EQNR)
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 9d9d0aa5-5080-4535-b63c-2d2941d4d648 (SHEL)
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 1e61b39d-2c4e-4a84-b31a-4ff600209d3b (XOM)
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: e845e498-085c-486a-90e9-b00ad1f03c0d (NVDA)
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 1528fb21-24a6-4095-8e88-cf183dd63b5f (COIN)
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: d9b16091-40f9-4ad1-8e01-fc07a0c910e5 (XOP)
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: c839b2db-2494-43da-a201-242c748c4bd0 (XLE)
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 4f79f21a-8198-4060-9141-68a058659607 (APA)
+2026-09-28 15:40:59 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
+2026-09-28 15:40:59 [INFO] [DualRegime.Executor] 11:30 AM Cutoff check complete. Cancelled 9 unfilled orders.
