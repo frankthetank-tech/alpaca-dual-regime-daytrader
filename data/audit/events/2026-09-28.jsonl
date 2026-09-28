@@ -12,3 +12,4 @@
 {"timestamp_utc": "2026-09-28T13:51:08.260066+00:00", "timestamp_ny": "2026-09-28 09:51:08.260", "event_type": "ORDER_SUBMITTED", "payload": {"index": 9, "symbol": "NVDA", "direction": "LONG", "qty": 1, "stop_price": 233.2, "sl": 230.4, "tp": 241.36, "order_id": "e845e498-085c-486a-90e9-b00ad1f03c0d", "remaining_cash": 8792.729999999998}}
 {"timestamp_utc": "2026-09-28T13:51:08.427884+00:00", "timestamp_ny": "2026-09-28 09:51:08.427", "event_type": "ORDER_BATCH_COMPLETE", "payload": {"orders_placed": 9, "capital_committed": 1084.6900000000023, "remaining_cash": 8792.729999999998}}
 {"timestamp_utc": "2026-09-28T15:40:59.485534+00:00", "timestamp_ny": "2026-09-28 11:40:59.485", "event_type": "CUTOFF_1130", "payload": {"cancelled_count": 9}}
+{"timestamp_utc": "2026-09-28T20:01:05.937301+00:00", "timestamp_ny": "2026-09-28 16:01:05.937", "event_type": "MOC_LIQUIDATION", "payload": {"closed_count": 4}}
