@@ -82,3 +82,28 @@
 2026-09-29 13:51:22 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: ce95e585-abba-468e-a74b-4c779a5418d4
 2026-09-29 13:51:22 [INFO] [DualRegime.Executor] Multi-Order Submission Complete! Placed 25 orders. Total Capital Committed: $8,034.54 | Remaining Cash Reserve: $1,835.41
 2026-09-29 13:51:22 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
+2026-09-29 15:41:39 [INFO] [DualRegime.Audit] Initialized daily audit logging -> /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/audit/logs/2026-09-29.log
+2026-09-29 15:41:39 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 51ed79f8-41a9-4272-a3f0-1041d2c83a30 (XLK)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: ac1359b3-62fd-48e8-98b5-5adde9711f0e (EWY)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 8d55c404-7e1a-4140-87d7-3e9dd33e0fe0 (INTC)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 912b41e5-0fea-4455-8155-324559c29ce9 (NEM)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 4c550caf-ab77-47da-9e7d-8a6299ebc919 (GLW)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 97c0e8fd-57c5-4ec9-9ef7-b5e5bce68dc2 (SMH)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 9ea91f41-aacd-49f1-8b36-6fcd2154130b (STX)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: b2d41a98-4304-4f40-85ed-f477b1fd1f23 (META)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: b9b7b741-b38e-488d-ae16-16e11a59f65e (AMAT)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: ff4112ca-2a44-4a41-8f62-877f6dede532 (ETN)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: bcbbb20d-4b21-4c8d-8843-22e41bf61cd7 (NTRA)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 85105108-c2d5-4cf0-accc-0551e68df266 (TSLA)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: ac4f0bc2-018a-40c0-bf61-044e59ca61b8 (LRCX)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 390e012c-784f-4015-a5fb-55faeaac3258 (HLT)
+2026-09-29 15:41:40 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 34dad3b5-9e42-475f-83f5-02901aaa0a7e (NVDA)
+2026-09-29 15:41:41 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 3ed18db1-e573-48f7-a215-7b38ed22ee5c (OKTA)
+2026-09-29 15:41:41 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: db202ae1-f4f9-4c16-a082-83949b1d618b (COIN)
+2026-09-29 15:41:41 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 32342cf0-a820-4af2-9f95-09257116e657 (JCI)
+2026-09-29 15:41:41 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 4a4d9152-a6dc-4e87-94a7-c74758ef1a06 (HOOD)
+2026-09-29 15:41:41 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: d3d28e31-6020-4987-8eff-33ebbe328d41 (DAL)
+2026-09-29 15:41:41 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 3dd31966-024e-46c9-92ad-b5fd2542a92d (KMX)
+2026-09-29 15:41:41 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 9151a72d-cd67-4061-b882-b0a0e0be0d34 (KR)
+2026-09-29 15:41:41 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
+2026-09-29 15:41:41 [INFO] [DualRegime.Executor] 11:30 AM Cutoff check complete. Cancelled 22 unfilled orders.
