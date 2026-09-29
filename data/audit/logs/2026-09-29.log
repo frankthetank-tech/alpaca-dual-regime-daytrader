@@ -107,3 +107,7 @@
 2026-09-29 15:41:41 [INFO] [DualRegime.Executor] Cancelled unfilled resting order: 9151a72d-cd67-4061-b882-b0a0e0be0d34 (KR)
 2026-09-29 15:41:41 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
 2026-09-29 15:41:41 [INFO] [DualRegime.Executor] 11:30 AM Cutoff check complete. Cancelled 22 unfilled orders.
+2026-09-29 20:02:35 [INFO] [DualRegime.Audit] Initialized daily audit logging -> /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/audit/logs/2026-09-29.log
+2026-09-29 20:02:36 [INFO] [DualRegime.Executor] Cancelled all open orders before MOC liquidation.
+2026-09-29 20:02:36 [INFO] [DualRegime.Executor] Liquidated 6 open positions via Market-on-Close. Account is 100% Cash.
+2026-09-29 20:02:36 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
