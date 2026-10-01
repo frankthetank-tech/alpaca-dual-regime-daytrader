@@ -9,9 +9,9 @@
   "entry_stop_price": 28.95,
   "stop_loss_price": 28.6,
   "take_profit_price": 29.96,
-  "order_status": "EXPIRED",
+  "order_status": "CLOSED_MOC",
   "order_id": null,
-  "last_updated": "2026-10-01T15:41:39.465718",
+  "last_updated": "2026-10-01T19:55:14.394153",
   "qualified_count": 30,
   "qualified_candidates": [
     "CLOU",
