@@ -43,7 +43,7 @@ ORDER_QTY = 1                  # Strictly 1 full whole share per order
 SCHEDULE_WARMUP_TIME = "09:40" # 09:40 AM EST: Boot runner & pre-fetch 90-day daily metrics
 SCHEDULE_SCAN_TIME = "09:45"   # 09:45 AM EST: Evaluate Macro Shield & submit conditional stop orders
 SCHEDULE_CUTOFF_TIME = "11:30" # 11:30 AM EST: Cancel unfilled entry stop orders
-SCHEDULE_MOC_TIME = "15:55"    # 15:55 PM EST: Liquidate all open positions (MOC exit)
+SCHEDULE_MOC_TIME = "15:45"    # 15:45 PM EST: Early liquidation trigger (guarantees 100% cash before 4:00 PM close)
 
 # ==========================================
 # 3. TRADABLE UNIVERSE (500 PREDEFINED ASSETS - ZERO LEVERAGED ETFS)

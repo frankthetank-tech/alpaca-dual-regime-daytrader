@@ -6,8 +6,8 @@ on:
     - cron: '40 13 * * 1-5'
     # 11:30 AM EDT = 15:30 UTC (Mon-Fri) -> Cancel Unfilled Resting Entry Orders (Remain 100% Cash)
     - cron: '30 15 * * 1-5'
-    # 03:55 PM EDT = 19:55 UTC (Mon-Fri) -> Market-on-Close (MOC) Liquidation (100% Cash Overnight)
-    - cron: '55 19 * * 1-5'
+    # 03:45 PM EDT = 19:45 UTC (Mon-Fri) -> Early Boot & Market-on-Close (MOC) Liquidation (100% Cash Overnight)
+    - cron: '45 19 * * 1-5'
   workflow_dispatch:
     inputs:
       action:

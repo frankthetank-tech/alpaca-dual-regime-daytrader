@@ -26,9 +26,9 @@ Autonomous institutional day trading system implementing **Strategy #3: Dual-Reg
 
 ## 2. GitHub Actions Automated Cloud Schedule (Mon-Fri)
 
-1. **09:45 AM EDT (13:45 UTC):** Run Macro Shield & Order Placement (`python main.py --scan`)
+1. **09:40 AM EDT (13:40 UTC):** Early Warmup, Pre-fetch & 09:45:00 AM Precision Execution (`python main.py --warmup`)
 2. **11:30 AM EDT (15:30 UTC):** Cancel Unfilled Entry Orders (`python main.py --cutoff`)
-3. **03:55 PM EDT (19:55 UTC):** Market-on-Close Exit (`python main.py --moc`)
+3. **03:45 PM EDT (19:45 UTC):** Early MOC Liquidation to ensure 100% Cash before 4:00 PM close (`python main.py --moc`)
 
 ---
 
