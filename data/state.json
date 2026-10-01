@@ -1,257 +1,247 @@
 {
-  "date": "2026-09-30",
+  "date": "2026-10-01",
   "macro_regime": "BULLISH",
-  "spy_0945": 766.32,
-  "spy_sma50": 762.4234,
-  "spy_sma200": 719.2182,
-  "selected_candidate": "SNAP",
+  "spy_0945": 763.48,
+  "spy_sma50": 762.7071000000001,
+  "spy_sma200": 719.5841499999999,
+  "selected_candidate": "CLOU",
   "direction": "LONG",
-  "entry_stop_price": 5.51,
-  "stop_loss_price": 5.44,
-  "take_profit_price": 5.7,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 28.95,
+  "stop_loss_price": 28.6,
+  "take_profit_price": 29.96,
+  "order_status": "28_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-09-30T20:01:35.726411",
-  "qualified_count": 33,
+  "last_updated": "2026-10-01T13:51:38.504532",
+  "qualified_count": 30,
   "qualified_candidates": [
-    "SNAP",
-    "CCL",
     "CLOU",
-    "DBC",
-    "EWZ",
-    "SMCI",
-    "XLE",
-    "HPE",
-    "BBY",
-    "EL",
+    "GTLB",
     "CIBR",
-    "HOOD",
-    "USO",
+    "IGV",
+    "XLC",
+    "HACK",
+    "NOW",
+    "DUOL",
     "JCI",
-    "SKYY",
+    "SHOP",
+    "EWY",
     "QCOM",
-    "XLK",
-    "COIN",
+    "PLTR",
+    "KLAC",
     "OKTA",
     "NVDA",
-    "PSX",
-    "CRWD",
+    "ALNY",
+    "MRVL",
+    "DDOG",
     "ARM",
-    "MTUM",
+    "LRCX",
+    "CDNS",
+    "GOOG",
     "GOOGL",
-    "VLO",
     "SNPS",
-    "NTRA",
     "MSFT",
-    "DELL",
+    "AMAT",
     "SMH",
-    "STX",
-    "MU"
+    "META",
+    "MCK"
   ],
   "active_orders": [
     {
-      "id": "7066912c-aa47-49ca-b821-86c35d34240e",
-      "symbol": "CCL",
-      "qty": 1,
-      "price": 25.47,
-      "direction": "LONG"
-    },
-    {
-      "id": "787f0af0-e164-4cf0-894a-4d3fa6057e52",
+      "id": "dd8f4f5f-6341-4f7b-98ca-3d8abd520c9d",
       "symbol": "CLOU",
       "qty": 1,
-      "price": 28.53,
+      "price": 28.95,
       "direction": "LONG"
     },
     {
-      "id": "e45a50b0-ab15-4b74-984f-a8e5d15ccdd6",
-      "symbol": "DBC",
+      "id": "f6d95dca-afc8-4ada-ab1a-1e6a5b8c34a1",
+      "symbol": "GTLB",
       "qty": 1,
-      "price": 32.57,
+      "price": 48.3,
       "direction": "LONG"
     },
     {
-      "id": "2b1d838b-caa3-440a-aa34-3fbdc788004e",
-      "symbol": "EWZ",
-      "qty": 1,
-      "price": 37.03,
-      "direction": "LONG"
-    },
-    {
-      "id": "3e723aba-96be-4d6a-a1be-7d42031ae85d",
-      "symbol": "SMCI",
-      "qty": 1,
-      "price": 42.67,
-      "direction": "LONG"
-    },
-    {
-      "id": "6849a8e8-cf99-463f-8176-593cf6aee7cb",
-      "symbol": "XLE",
-      "qty": 1,
-      "price": 62.06,
-      "direction": "LONG"
-    },
-    {
-      "id": "84e17a93-b0c1-4abb-8d3f-b141a1c77592",
-      "symbol": "HPE",
-      "qty": 1,
-      "price": 67.09,
-      "direction": "LONG"
-    },
-    {
-      "id": "f145c5cc-1bb0-4974-bdaf-b7e9d0c2a73b",
-      "symbol": "BBY",
-      "qty": 1,
-      "price": 90.33,
-      "direction": "LONG"
-    },
-    {
-      "id": "e0f4fa6a-a635-4373-976f-a7bbb43dc600",
-      "symbol": "EL",
-      "qty": 1,
-      "price": 95.15,
-      "direction": "LONG"
-    },
-    {
-      "id": "b7d6e8b7-74bd-4f36-8350-7f9f633c5129",
+      "id": "2971ec3d-2449-4354-b39b-e5a52145ad57",
       "symbol": "CIBR",
       "qty": 1,
-      "price": 103.36,
+      "price": 104.2,
       "direction": "LONG"
     },
     {
-      "id": "7530a470-bfc0-454b-962f-cad8f37a5385",
-      "symbol": "HOOD",
+      "id": "730ce221-036c-48f2-b152-f754293dbd4d",
+      "symbol": "IGV",
       "qty": 1,
-      "price": 123.32,
+      "price": 108.26,
       "direction": "LONG"
     },
     {
-      "id": "486445b6-e199-4a43-a16c-3ae30b5664a5",
-      "symbol": "USO",
+      "id": "1a252d9c-8d21-40fa-ae6d-cab5b158cb34",
+      "symbol": "XLC",
       "qty": 1,
-      "price": 147.15,
+      "price": 111.83,
       "direction": "LONG"
     },
     {
-      "id": "2c13ac28-4f76-4bc3-9fc0-7ecc04c5d575",
-      "symbol": "JCI",
+      "id": "aea2ede4-32b5-46e1-b297-119ad1695e27",
+      "symbol": "HACK",
       "qty": 1,
-      "price": 150.8,
+      "price": 121.8,
       "direction": "LONG"
     },
     {
-      "id": "ad8457d0-f51f-4110-9652-fb266cfee266",
-      "symbol": "SKYY",
+      "id": "4509937b-acf7-4504-8ea5-1cc1695be866",
+      "symbol": "NOW",
       "qty": 1,
-      "price": 165.39,
+      "price": 140.68,
       "direction": "LONG"
     },
     {
-      "id": "4de112fe-b9b1-4fb7-8024-6f497ee82dda",
+      "id": "b678169a-d968-496d-a1d0-b3e97d19bec7",
+      "symbol": "DUOL",
+      "qty": 1,
+      "price": 147.25,
+      "direction": "LONG"
+    },
+    {
+      "id": "88662def-5297-4560-a137-6b80d008e442",
+      "symbol": "SHOP",
+      "qty": 1,
+      "price": 152.56,
+      "direction": "LONG"
+    },
+    {
+      "id": "2bf7b408-81da-4745-8c7f-fa649a9deff0",
+      "symbol": "EWY",
+      "qty": 1,
+      "price": 184.94,
+      "direction": "LONG"
+    },
+    {
+      "id": "89db5713-ec7e-4d07-b056-2ccc92107ce2",
       "symbol": "QCOM",
       "qty": 1,
-      "price": 188.02,
+      "price": 185.16,
       "direction": "LONG"
     },
     {
-      "id": "edadaf8f-fdee-4fd5-baee-4c0c8296df59",
-      "symbol": "XLK",
+      "id": "8e1b666a-abff-4285-9bad-2d61d5b53a3e",
+      "symbol": "PLTR",
       "qty": 1,
-      "price": 196.4,
+      "price": 189.5,
       "direction": "LONG"
     },
     {
-      "id": "c992fc69-fbdc-4314-a8b1-22e79c71878a",
-      "symbol": "COIN",
+      "id": "cf2bda34-15b4-4718-a385-b988895da0e6",
+      "symbol": "KLAC",
       "qty": 1,
-      "price": 198.4,
+      "price": 199.78,
       "direction": "LONG"
     },
     {
-      "id": "9caa1d50-cf61-4909-8805-47b5ae5a2ba6",
+      "id": "a9a45329-8cf6-4225-91fb-607ae1115722",
       "symbol": "OKTA",
       "qty": 1,
-      "price": 211.0,
+      "price": 210.46,
       "direction": "LONG"
     },
     {
-      "id": "963c79cc-a72b-43f9-8d90-be9809553024",
+      "id": "9bfa8055-c9eb-4689-bacf-0a0db8f9f99b",
       "symbol": "NVDA",
       "qty": 1,
-      "price": 231.39,
+      "price": 231.54,
       "direction": "LONG"
     },
     {
-      "id": "19bef008-f382-49be-810e-e00bd2ede47c",
-      "symbol": "CRWD",
+      "id": "e77f0e62-ed1b-463d-8896-20276fe6e65c",
+      "symbol": "ALNY",
       "qty": 1,
-      "price": 267.44,
+      "price": 250.52,
       "direction": "LONG"
     },
     {
-      "id": "b00c0e57-4efe-44d7-b1f8-9e812cd8f945",
+      "id": "dbeb3758-5fb7-46d6-a7f8-82deabb6fa3e",
+      "symbol": "MRVL",
+      "qty": 1,
+      "price": 265.8,
+      "direction": "LONG"
+    },
+    {
+      "id": "eeaa2e5f-68d4-4c79-a751-37677c0c2902",
+      "symbol": "DDOG",
+      "qty": 1,
+      "price": 278.0,
+      "direction": "LONG"
+    },
+    {
+      "id": "fc67e6b6-2c94-432f-8c85-7dfe58e91cb9",
       "symbol": "ARM",
       "qty": 1,
-      "price": 295.48,
+      "price": 293.52,
       "direction": "LONG"
     },
     {
-      "id": "68d85b9a-3dd3-4ffb-bd0d-1b18cfa986db",
-      "symbol": "MTUM",
+      "id": "9ff29c7d-d27b-4113-a4e9-88477f79c5d6",
+      "symbol": "LRCX",
       "qty": 1,
-      "price": 318.79,
+      "price": 340.51,
       "direction": "LONG"
     },
     {
-      "id": "b5c97c02-2a57-46e2-932e-4a581c3f8907",
-      "symbol": "VLO",
+      "id": "4902bbe7-eead-457a-a6d0-fe9e98c203a8",
+      "symbol": "CDNS",
       "qty": 1,
-      "price": 398.84,
+      "price": 349.21,
       "direction": "LONG"
     },
     {
-      "id": "ee27712e-ffb2-4104-b798-d060e2e17317",
-      "symbol": "NTRA",
+      "id": "91f57402-d661-4e54-8f1f-6cf3dd7474f1",
+      "symbol": "GOOG",
       "qty": 1,
-      "price": 422.25,
+      "price": 350.0,
       "direction": "LONG"
     },
     {
-      "id": "6401bd35-aa5d-4f41-9082-bb011ddc5c0a",
+      "id": "7bcc2ff9-c6d3-4293-b589-13d53630a621",
+      "symbol": "GOOGL",
+      "qty": 1,
+      "price": 352.99,
+      "direction": "LONG"
+    },
+    {
+      "id": "83568177-c8b1-45f2-af09-2dfcb61b9b22",
       "symbol": "MSFT",
       "qty": 1,
-      "price": 516.34,
+      "price": 522.8,
       "direction": "LONG"
     },
     {
-      "id": "f2093a82-ddc2-456f-b0ee-1f003cfb117f",
-      "symbol": "DELL",
+      "id": "de09d277-a6f6-46ec-a185-9152829415fe",
+      "symbol": "AMAT",
       "qty": 1,
-      "price": 553.01,
+      "price": 530.46,
       "direction": "LONG"
     },
     {
-      "id": "fa978046-8417-4aaf-8d2e-6041e072dda3",
+      "id": "cc76b326-3c7b-4074-a0de-0516a1344b7c",
       "symbol": "SMH",
       "qty": 1,
-      "price": 611.57,
+      "price": 614.41,
       "direction": "LONG"
     },
     {
-      "id": "1a8a2b58-8d13-458e-b231-b153d535b0e3",
-      "symbol": "STX",
+      "id": "a8c115fc-2d02-4358-b486-75e0dcd843d8",
+      "symbol": "META",
       "qty": 1,
-      "price": 927.32,
+      "price": 735.63,
       "direction": "LONG"
     },
     {
-      "id": "84414f45-3432-4680-9aff-c01a474a96a2",
-      "symbol": "MU",
+      "id": "e827f233-816e-47a8-a393-84a215228399",
+      "symbol": "MCK",
       "qty": 1,
-      "price": 1083.4,
+      "price": 923.22,
       "direction": "LONG"
     }
   ],
-  "capital_committed": 7590.569999999998
+  "capital_committed": 7972.280000000002
 }

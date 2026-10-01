@@ -1,0 +1,90 @@
+2026-10-01 13:51:21 [INFO] [DualRegime.Audit] Initialized daily audit logging -> /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/audit/logs/2026-10-01.log
+2026-10-01 13:51:21 [INFO] [DualRegime.Main] Initializing 09:40 AM Pre-Market Warmup Cycle...
+2026-10-01 13:51:21 [INFO] [DualRegime.Scanner] Pre-fetching daily metrics for 500 tickers in vectorized batch (IEX)...
+2026-10-01 13:51:28 [INFO] [DualRegime.Scanner] Daily metrics pre-computed for 500 valid symbols.
+2026-10-01 13:51:28 [INFO] [DualRegime.Main] Target timestamp (13:45:00 UTC) already reached. Executing immediately.
+2026-10-01 13:51:29 [INFO] [DualRegime.Scanner] SPY 09:45: $763.48 | SMA50: $762.71 | SMA200: $719.58 => REGIME: BULLISH
+2026-10-01 13:51:29 [INFO] [DualRegime.Scanner] Using pre-cached daily metrics for 500 symbols.
+2026-10-01 13:51:29 [INFO] [DualRegime.Scanner] Pulling 15m intraday bars for 500 tickers in vectorized batch (IEX)...
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner] Intraday 15m bars retrieved for 478 symbols.
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner] Screening cross-section for BULLISH setups...
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner] Total fully qualified BULLISH candidates found: 30
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #1: CLOU  | Share Price: $  28.95 | Score: 0.0397 | RVOL: 5.55x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #2: GTLB  | Share Price: $  48.30 | Score: 0.0437 | RVOL: 1.60x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #3: CIBR  | Share Price: $ 104.20 | Score: 0.0151 | RVOL: 3.17x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #4: IGV   | Share Price: $ 108.26 | Score: 0.0128 | RVOL: 1.66x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #5: XLC   | Share Price: $ 111.83 | Score: 0.0079 | RVOL: 2.16x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #6: HACK  | Share Price: $ 121.80 | Score: 0.0068 | RVOL: 2.15x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #7: NOW   | Share Price: $ 140.68 | Score: 0.0532 | RVOL: 2.82x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #8: DUOL  | Share Price: $ 147.25 | Score: 0.0263 | RVOL: 1.95x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #9: JCI   | Share Price: $ 151.01 | Score: 0.0111 | RVOL: 1.35x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #10: SHOP  | Share Price: $ 152.56 | Score: 0.0418 | RVOL: 1.51x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #11: EWY   | Share Price: $ 184.94 | Score: 0.0050 | RVOL: 1.55x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #12: QCOM  | Share Price: $ 185.16 | Score: 0.0036 | RVOL: 1.29x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #13: PLTR  | Share Price: $ 189.50 | Score: 0.0091 | RVOL: 1.53x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #14: KLAC  | Share Price: $ 199.78 | Score: 0.0282 | RVOL: 2.23x
+2026-10-01 13:51:31 [INFO] [DualRegime.Scanner]    Candidate #15: OKTA  | Share Price: $ 210.46 | Score: 0.0045 | RVOL: 1.78x
+2026-10-01 13:51:31 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
+2026-10-01 13:51:31 [INFO] [DualRegime.Executor] Beginning Multi-Order Placement | Available Cash: $9,816.80 | Qualified Candidates: 30 | Max Positions: 50 | Throttle: 6.0 orders/sec
+2026-10-01 13:51:31 [INFO] [DualRegime.Executor] [1/30] Submitting LONG Bracket: 1 share of CLOU @ Stop: $28.95 | SL: $28.60 (-1.2%) | TP: $29.96 (+3.5%) | Remaining Cash: $9787.85
+2026-10-01 13:51:31 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: dd8f4f5f-6341-4f7b-98ca-3d8abd520c9d
+2026-10-01 13:51:31 [INFO] [DualRegime.Executor] [2/30] Submitting LONG Bracket: 1 share of GTLB @ Stop: $48.30 | SL: $47.72 (-1.2%) | TP: $49.99 (+3.5%) | Remaining Cash: $9739.55
+2026-10-01 13:51:31 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: f6d95dca-afc8-4ada-ab1a-1e6a5b8c34a1
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor] [3/30] Submitting LONG Bracket: 1 share of CIBR @ Stop: $104.20 | SL: $102.95 (-1.2%) | TP: $107.85 (+3.5%) | Remaining Cash: $9635.35
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 2971ec3d-2449-4354-b39b-e5a52145ad57
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor] [4/30] Submitting LONG Bracket: 1 share of IGV @ Stop: $108.26 | SL: $106.96 (-1.2%) | TP: $112.05 (+3.5%) | Remaining Cash: $9527.09
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 730ce221-036c-48f2-b152-f754293dbd4d
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor] [5/30] Submitting LONG Bracket: 1 share of XLC @ Stop: $111.83 | SL: $110.49 (-1.2%) | TP: $115.74 (+3.5%) | Remaining Cash: $9415.26
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 1a252d9c-8d21-40fa-ae6d-cab5b158cb34
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor] [6/30] Submitting LONG Bracket: 1 share of HACK @ Stop: $121.80 | SL: $120.34 (-1.2%) | TP: $126.06 (+3.5%) | Remaining Cash: $9293.46
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: aea2ede4-32b5-46e1-b297-119ad1695e27
+2026-10-01 13:51:32 [INFO] [DualRegime.Executor] [7/30] Submitting LONG Bracket: 1 share of NOW @ Stop: $140.68 | SL: $138.99 (-1.2%) | TP: $145.60 (+3.5%) | Remaining Cash: $9152.78
+2026-10-01 13:51:33 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 4509937b-acf7-4504-8ea5-1cc1695be866
+2026-10-01 13:51:33 [INFO] [DualRegime.Executor] [8/30] Submitting LONG Bracket: 1 share of DUOL @ Stop: $147.25 | SL: $145.48 (-1.2%) | TP: $152.40 (+3.5%) | Remaining Cash: $9005.53
+2026-10-01 13:51:33 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: b678169a-d968-496d-a1d0-b3e97d19bec7
+2026-10-01 13:51:33 [INFO] [DualRegime.Executor] [9/30] Submitting LONG Bracket: 1 share of JCI @ Stop: $151.01 | SL: $149.20 (-1.2%) | TP: $156.30 (+3.5%) | Remaining Cash: $8854.52
+2026-10-01 13:51:33 [ERROR] [DualRegime.Executor] Failed to submit bracket order for JCI: {"code":42210000,"market_price":"151.18","message":"stop price must be greater than current price","stop_price":"151.01"}
+2026-10-01 13:51:33 [INFO] [DualRegime.Executor] [9/30] Submitting LONG Bracket: 1 share of SHOP @ Stop: $152.56 | SL: $150.73 (-1.2%) | TP: $157.90 (+3.5%) | Remaining Cash: $8852.97
+2026-10-01 13:51:33 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 88662def-5297-4560-a137-6b80d008e442
+2026-10-01 13:51:33 [INFO] [DualRegime.Executor] [10/30] Submitting LONG Bracket: 1 share of EWY @ Stop: $184.94 | SL: $182.72 (-1.2%) | TP: $191.41 (+3.5%) | Remaining Cash: $8668.03
+2026-10-01 13:51:33 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 2bf7b408-81da-4745-8c7f-fa649a9deff0
+2026-10-01 13:51:34 [INFO] [DualRegime.Executor] [11/30] Submitting LONG Bracket: 1 share of QCOM @ Stop: $185.16 | SL: $182.94 (-1.2%) | TP: $191.64 (+3.5%) | Remaining Cash: $8482.87
+2026-10-01 13:51:34 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 89db5713-ec7e-4d07-b056-2ccc92107ce2
+2026-10-01 13:51:34 [INFO] [DualRegime.Executor] [12/30] Submitting LONG Bracket: 1 share of PLTR @ Stop: $189.50 | SL: $187.23 (-1.2%) | TP: $196.13 (+3.5%) | Remaining Cash: $8293.37
+2026-10-01 13:51:34 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 8e1b666a-abff-4285-9bad-2d61d5b53a3e
+2026-10-01 13:51:34 [INFO] [DualRegime.Executor] [13/30] Submitting LONG Bracket: 1 share of KLAC @ Stop: $199.78 | SL: $197.38 (-1.2%) | TP: $206.77 (+3.5%) | Remaining Cash: $8093.59
+2026-10-01 13:51:34 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: cf2bda34-15b4-4718-a385-b988895da0e6
+2026-10-01 13:51:34 [INFO] [DualRegime.Executor] [14/30] Submitting LONG Bracket: 1 share of OKTA @ Stop: $210.46 | SL: $207.93 (-1.2%) | TP: $217.83 (+3.5%) | Remaining Cash: $7883.13
+2026-10-01 13:51:34 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: a9a45329-8cf6-4225-91fb-607ae1115722
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor] [15/30] Submitting LONG Bracket: 1 share of NVDA @ Stop: $231.54 | SL: $228.76 (-1.2%) | TP: $239.64 (+3.5%) | Remaining Cash: $7651.59
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 9bfa8055-c9eb-4689-bacf-0a0db8f9f99b
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor] [16/30] Submitting LONG Bracket: 1 share of ALNY @ Stop: $250.52 | SL: $247.51 (-1.2%) | TP: $259.29 (+3.5%) | Remaining Cash: $7401.07
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: e77f0e62-ed1b-463d-8896-20276fe6e65c
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor] [17/30] Submitting LONG Bracket: 1 share of MRVL @ Stop: $265.80 | SL: $262.61 (-1.2%) | TP: $275.10 (+3.5%) | Remaining Cash: $7135.27
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: dbeb3758-5fb7-46d6-a7f8-82deabb6fa3e
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor] [18/30] Submitting LONG Bracket: 1 share of DDOG @ Stop: $278.00 | SL: $274.66 (-1.2%) | TP: $287.73 (+3.5%) | Remaining Cash: $6857.27
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: eeaa2e5f-68d4-4c79-a751-37677c0c2902
+2026-10-01 13:51:35 [INFO] [DualRegime.Executor] [19/30] Submitting LONG Bracket: 1 share of ARM @ Stop: $293.52 | SL: $290.00 (-1.2%) | TP: $303.79 (+3.5%) | Remaining Cash: $6563.75
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: fc67e6b6-2c94-432f-8c85-7dfe58e91cb9
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor] [20/30] Submitting LONG Bracket: 1 share of LRCX @ Stop: $340.51 | SL: $336.42 (-1.2%) | TP: $352.43 (+3.5%) | Remaining Cash: $6223.24
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 9ff29c7d-d27b-4113-a4e9-88477f79c5d6
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor] [21/30] Submitting LONG Bracket: 1 share of CDNS @ Stop: $349.21 | SL: $345.02 (-1.2%) | TP: $361.43 (+3.5%) | Remaining Cash: $5874.03
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 4902bbe7-eead-457a-a6d0-fe9e98c203a8
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor] [22/30] Submitting LONG Bracket: 1 share of GOOG @ Stop: $350.00 | SL: $345.80 (-1.2%) | TP: $362.25 (+3.5%) | Remaining Cash: $5524.03
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 91f57402-d661-4e54-8f1f-6cf3dd7474f1
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor] [23/30] Submitting LONG Bracket: 1 share of GOOGL @ Stop: $352.99 | SL: $348.75 (-1.2%) | TP: $365.34 (+3.5%) | Remaining Cash: $5171.04
+2026-10-01 13:51:36 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 7bcc2ff9-c6d3-4293-b589-13d53630a621
+2026-10-01 13:51:37 [INFO] [DualRegime.Executor] [24/30] Submitting LONG Bracket: 1 share of SNPS @ Stop: $480.00 | SL: $474.24 (-1.2%) | TP: $496.80 (+3.5%) | Remaining Cash: $4691.04
+2026-10-01 13:51:37 [ERROR] [DualRegime.Executor] Failed to submit bracket order for SNPS: {"code":42210000,"market_price":"480.03","message":"stop price must be greater than current price","stop_price":"480"}
+2026-10-01 13:51:37 [INFO] [DualRegime.Executor] [24/30] Submitting LONG Bracket: 1 share of MSFT @ Stop: $522.80 | SL: $516.53 (-1.2%) | TP: $541.10 (+3.5%) | Remaining Cash: $4648.24
+2026-10-01 13:51:37 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: 83568177-c8b1-45f2-af09-2dfcb61b9b22
+2026-10-01 13:51:37 [INFO] [DualRegime.Executor] [25/30] Submitting LONG Bracket: 1 share of AMAT @ Stop: $530.46 | SL: $524.09 (-1.2%) | TP: $549.03 (+3.5%) | Remaining Cash: $4117.78
+2026-10-01 13:51:37 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: de09d277-a6f6-46ec-a185-9152829415fe
+2026-10-01 13:51:37 [INFO] [DualRegime.Executor] [26/30] Submitting LONG Bracket: 1 share of SMH @ Stop: $614.41 | SL: $607.04 (-1.2%) | TP: $635.91 (+3.5%) | Remaining Cash: $3503.37
+2026-10-01 13:51:37 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: cc76b326-3c7b-4074-a0de-0516a1344b7c
+2026-10-01 13:51:38 [INFO] [DualRegime.Executor] [27/30] Submitting LONG Bracket: 1 share of META @ Stop: $735.63 | SL: $726.80 (-1.2%) | TP: $761.38 (+3.5%) | Remaining Cash: $2767.74
+2026-10-01 13:51:38 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: a8c115fc-2d02-4358-b486-75e0dcd843d8
+2026-10-01 13:51:38 [INFO] [DualRegime.Executor] [28/30] Submitting LONG Bracket: 1 share of MCK @ Stop: $923.22 | SL: $912.14 (-1.2%) | TP: $955.53 (+3.5%) | Remaining Cash: $1844.52
+2026-10-01 13:51:38 [INFO] [DualRegime.Executor]    -> Accepted by Alpaca matching engine! Order ID: e827f233-816e-47a8-a393-84a215228399
+2026-10-01 13:51:38 [INFO] [DualRegime.Executor] Multi-Order Submission Complete! Placed 28 orders. Total Capital Committed: $7,972.28 | Remaining Cash Reserve: $1,844.52
+2026-10-01 13:51:38 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
