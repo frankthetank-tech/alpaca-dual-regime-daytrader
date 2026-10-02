@@ -1,7 +1,7 @@
 """
-Strategy #3: Order Execution Engine
-Single Full-Share Multi-Order Execution Engine with 6 Orders/Sec Throttling
-Places Native Alpaca Bracket Orders (qty=1), Manages 11:30 AM Cutoff & 15:55 PM MOC Liquidation
+Strategy #3: Order Execution Engine (ORB-15 Cond 4 V2)
+Dynamic Account-Tier Sizing & Whole-Share Multi-Order Execution Engine
+Places Native Alpaca Bracket Orders, Manages 11:30 AM Cutoff & 15:45 PM MOC Liquidation
 """
 
 import math
@@ -28,9 +28,15 @@ def get_trading_client():
 
 def submit_entry_brackets_multi(candidates, dry_run=False):
     """
-    Submits native bracket stop orders for 1 full share (qty=1) across the maximum
-    quantity of qualified tickers possible with the available cash balance (capped at MAX_POSITIONS).
-    Throttled at ORDER_THROTTLE_RATE (6 orders per second) to stay well under Alpaca rate limits.
+    Submits native bracket stop orders using Dynamic Account-Tier Sizing (Whole Shares Only).
+    - Max positions capped dynamically based on cash equity:
+        < $15k: 2 positions max (50% BP each)
+        < $50k: 3 positions max (33.3% BP each)
+        < $150k: 4 positions max (25% BP each)
+        < $500k: 5 positions max (20% BP each)
+        >= $500k: 8 positions max (12.5% BP each)
+    - Allocates strictly integer whole shares (zero fractional share exposure).
+    - Throttled at ORDER_THROTTLE_RATE (6 orders per second).
     """
     if not candidates:
         logger.info("No qualified candidates provided to execute.")
@@ -38,23 +44,38 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
 
     client = get_trading_client()
     account = client.get_account()
-    cash = float(account.cash) * config.MAX_ALLOCATION_PCT
-    remaining_cash = cash
+    cash = float(account.cash)
+    
+    # Calculate buying power based on configured margin multiplier (default: 2.0x BP / 100% margin)
+    broker_bp = float(account.buying_power)
+    buying_power = min(cash * config.BUYING_POWER_MULT, broker_bp) if broker_bp > 0 else (cash * config.BUYING_POWER_MULT)
 
-    logger.info(
-        f"Beginning Multi-Order Placement | Available Cash: ${cash:,.2f} | "
-        f"Qualified Candidates: {len(candidates)} | Max Positions: {config.MAX_POSITIONS} | "
-        f"Throttle: {config.ORDER_THROTTLE_RATE} orders/sec"
-    )
+    # Dynamic Account Tier Max Positions
+    max_positions = config.get_max_positions(cash)
+    selected_candidates = candidates[:max_positions]
+    n_pos = len(selected_candidates)
+
+    if n_pos == 0:
+        logger.info("Zero candidates selected for execution.")
+        return []
+
+    alloc_per_pos = buying_power / n_pos
+
+    logger.info("=" * 80)
+    logger.info("BEGINNING DYNAMIC TIER MULTI-ORDER BRACKET PLACEMENT")
+    logger.info(f"   Cash Equity:       ${cash:,.2f}")
+    logger.info(f"   Buying Power:      ${buying_power:,.2f} ({config.BUYING_POWER_MULT:.1f}x Multiplier)")
+    logger.info(f"   Max Positions:     {max_positions} (Dynamic Tier)")
+    logger.info(f"   Selected Setups:   {n_pos} candidates")
+    logger.info(f"   Alloc per Pos:     ${alloc_per_pos:,.2f}")
+    logger.info(f"   Throttle Rate:     {config.ORDER_THROTTLE_RATE} orders/sec")
+    logger.info("=" * 80)
 
     orders_submitted = []
     throttle_sleep = 1.0 / float(config.ORDER_THROTTLE_RATE)
+    remaining_bp = buying_power
 
-    for i, candidate in enumerate(candidates, start=1):
-        if len(orders_submitted) >= config.MAX_POSITIONS:
-            logger.info(f"Reached MAX_POSITIONS cap ({config.MAX_POSITIONS} orders). Halting order submissions.")
-            break
-
+    for i, candidate in enumerate(selected_candidates, start=1):
         sym = candidate["symbol"]
         entry_price = candidate["entry_stop"]
         direction = candidate["direction"]
@@ -62,27 +83,35 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
         stop_price = round(entry_price, 2)
         stop_loss_px = round(candidate["stop_loss"], 2)
         take_profit_px = round(candidate["take_profit"], 2)
+        target_pct = candidate.get("target_pct", 0.035)
 
-        # Check cash balance for 1 full share
-        if remaining_cash < stop_price:
-            logger.info(
-                f"Candidate #{i} ({sym} @ ${stop_price:.2f}) exceeds remaining cash (${remaining_cash:.2f}). "
-                f"Since candidates are sorted by price ascending, halting submissions."
+        # Whole Shares Only (Integer Floor Division)
+        qty = int(alloc_per_pos // stop_price)
+        if qty <= 0:
+            logger.warning(
+                f"Candidate #{i} ({sym} @ ${stop_price:.2f}) share price exceeds position allocation (${alloc_per_pos:,.2f}). "
+                f"Cannot purchase 1 whole share. Skipping candidate."
             )
             audit_logger.record_event("ORDER_SKIPPED", {
                 "symbol": sym,
                 "price": stop_price,
-                "remaining_cash": remaining_cash,
-                "reason": "exceeds_remaining_cash"
+                "alloc": alloc_per_pos,
+                "reason": "share_price_exceeds_allocation"
             })
+            continue
+
+        order_cost = qty * stop_price
+        if remaining_bp < order_cost:
+            logger.warning(
+                f"Candidate #{i} ({sym} x {qty} shs = ${order_cost:,.2f}) exceeds remaining buying power (${remaining_bp:,.2f}). "
+                f"Halting further orders."
+            )
             break
 
-        qty = config.ORDER_QTY  # Strictly 1 full share
-
         logger.info(
-            f"[{len(orders_submitted) + 1}/{min(len(candidates), config.MAX_POSITIONS)}] Submitting {direction} Bracket: "
-            f"{qty} share of {sym} @ Stop: ${stop_price:.2f} | SL: ${stop_loss_px:.2f} (-1.2%) | TP: ${take_profit_px:.2f} (+3.5%) | "
-            f"Remaining Cash: ${remaining_cash - stop_price:.2f}"
+            f"[{i}/{n_pos}] Submitting {direction} Bracket: {qty} shs of {sym} @ Stop: ${stop_price:.2f} | "
+            f"SL: ${stop_loss_px:.2f} (-1.2%) | TP: ${take_profit_px:.2f} (+{target_pct*100:.2f}%) | "
+            f"Cost: ${order_cost:,.2f} | Remaining BP: ${remaining_bp - order_cost:,.2f}"
         )
 
         if dry_run:
@@ -91,9 +120,10 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
                 "symbol": sym,
                 "qty": qty,
                 "price": stop_price,
-                "direction": direction
+                "direction": direction,
+                "cost": order_cost
             })
-            remaining_cash -= stop_price
+            remaining_bp -= order_cost
             audit_logger.record_event("ORDER_SUBMITTED", {
                 "index": len(orders_submitted),
                 "symbol": sym,
@@ -103,7 +133,8 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
                 "sl": stop_loss_px,
                 "tp": take_profit_px,
                 "order_id": f"dry-run-{sym}",
-                "remaining_cash": remaining_cash
+                "order_cost": order_cost,
+                "remaining_bp": remaining_bp
             })
             time.sleep(0.01)
             continue
@@ -125,9 +156,10 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
                 "symbol": sym,
                 "qty": qty,
                 "price": stop_price,
-                "direction": direction
+                "direction": direction,
+                "cost": order_cost
             })
-            remaining_cash -= stop_price
+            remaining_bp -= order_cost
             logger.info(f"   -> Accepted by Alpaca matching engine! Order ID: {order.id}")
 
             audit_logger.record_event("ORDER_SUBMITTED", {
@@ -139,10 +171,10 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
                 "sl": stop_loss_px,
                 "tp": take_profit_px,
                 "order_id": str(order.id),
-                "remaining_cash": remaining_cash
+                "order_cost": order_cost,
+                "remaining_bp": remaining_bp
             })
 
-            # Throttling delay to guarantee compliance with 10 req/s burst limit
             time.sleep(throttle_sleep)
 
         except Exception as e:
@@ -151,13 +183,12 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
                 "symbol": sym,
                 "error": str(e)
             })
-            # Still sleep to prevent burst on errors
             time.sleep(throttle_sleep)
 
-    total_committed = cash - remaining_cash
+    total_committed = buying_power - remaining_bp
     logger.info(
-        f"Multi-Order Submission Complete! Placed {len(orders_submitted)} orders. "
-        f"Total Capital Committed: ${total_committed:,.2f} | Remaining Cash Reserve: ${remaining_cash:,.2f}"
+        f"Dynamic Bracket Submission Complete! Placed {len(orders_submitted)} orders. "
+        f"Total Committed Buying Power: ${total_committed:,.2f} | Remaining BP Reserve: ${remaining_bp:,.2f}"
     )
 
     state = state_manager.load_state()
@@ -169,7 +200,7 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
     audit_logger.record_event("ORDER_BATCH_COMPLETE", {
         "orders_placed": len(orders_submitted),
         "capital_committed": total_committed,
-        "remaining_cash": remaining_cash
+        "remaining_bp": remaining_bp
     })
     audit_logger.update_daily_summary({
         "orders_placed": len(orders_submitted),
@@ -191,7 +222,6 @@ def cancel_unfilled_entries():
         orders = client.get_orders()
         cancelled_count = 0
         for o in orders:
-            # If the order is still open or held
             if o.status in ("new", "accepted", "pending_new", "held"):
                 client.cancel_order_by_id(o.id)
                 cancelled_count += 1
@@ -213,9 +243,9 @@ def cancel_unfilled_entries():
 
 def market_on_close_liquidation():
     """
-    Called at 15:55 PM EST:
+    Called at 15:45 PM EST:
     Closes all open positions and cancels any resting orders.
-    Enforces 100% Cash overnight (zero overnight risk).
+    Enforces 100% Cash overnight (zero overnight risk & zero margin interest).
     """
     client = get_trading_client()
     state = state_manager.load_state()

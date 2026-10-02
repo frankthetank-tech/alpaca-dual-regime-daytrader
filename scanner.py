@@ -1,6 +1,6 @@
 """
-Strategy #3: Vectorized High-Performance Scanner & Signal Engine
-Evaluates 09:45 AM Dual-Regime Macro Shield and Ranks 500 Qualified Candidates
+Strategy #3: Vectorized High-Performance Scanner & Signal Engine (ORB-15 Cond 4 V2)
+Evaluates 09:45 AM Dual-Regime Macro Shield and Ranks Qualified Candidates
 Optimized with Vectorized Batch Market Data Retrieval & Sub-Second Execution
 """
 
@@ -28,9 +28,10 @@ def get_feed():
 
 def evaluate_macro_shield():
     """
-    Evaluates Macro Regime at 09:45 AM:
+    Evaluates Macro Regime at 09:45 AM (ORB-15 Cond 4 V2):
     - SPY[09:45] > SMA200 AND SPY[09:45] > SMA50 -> BULLISH (Long Engine)
-    - SPY[09:45] < SMA200 OR SPY[09:45] < SMA50  -> BEARISH (Short Engine)
+    - SPY[09:45] < SMA200 OR SPY[09:45] < SMA50 AND SPY[09:45] < SPY[Open] -> BEARISH (Short Engine)
+    - Otherwise -> NEUTRAL (Defensive Cash: 0% exposure)
     """
     client = get_data_client()
     feed = get_feed()
@@ -55,6 +56,7 @@ def evaluate_macro_shield():
     sma50 = float(spy_daily["close"].rolling(50).mean().iloc[-2]) if len(spy_daily) >= 51 else float(spy_daily["close"].mean())
     sma200 = float(spy_daily["close"].rolling(200).mean().iloc[-2]) if len(spy_daily) >= 201 else sma50
     prev_close = float(spy_daily["close"].iloc[-2])
+    daily_open = float(spy_daily["open"].iloc[-1])
 
     # 2. Fetch SPY Intraday Minute Bars up to 09:45 AM
     today_open = now_ny.replace(hour=9, minute=30, second=0, microsecond=0)
@@ -72,28 +74,43 @@ def evaluate_macro_shield():
             spy_1m = bars_1m.xs("SPY", level=0).sort_index()
         else:
             spy_1m = bars_1m.sort_index()
+        spy_open = float(spy_1m["open"].iloc[0])
         spy_0945 = float(spy_1m["close"].iloc[-1])
     else:
+        spy_open = daily_open
         spy_0945 = float(spy_daily["close"].iloc[-1])
 
     is_bull = (spy_0945 > sma200) and (spy_0945 > sma50)
     is_bear = (spy_0945 < sma200) or (spy_0945 < sma50)
+    is_red = (spy_0945 < spy_open)
+    is_bear_red = is_bear and is_red
 
-    regime = "BULLISH" if is_bull else ("BEARISH" if is_bear else "NEUTRAL")
-    logger.info(f"SPY 09:45: ${spy_0945:.2f} | SMA50: ${sma50:.2f} | SMA200: ${sma200:.2f} => REGIME: {regime}")
+    if is_bull:
+        regime = "BULLISH"
+    elif is_bear_red:
+        regime = "BEARISH"
+    else:
+        regime = "NEUTRAL"
+
+    logger.info(
+        f"SPY 09:45: ${spy_0945:.2f} (Open: ${spy_open:.2f}, Red: {is_red}) | "
+        f"SMA50: ${sma50:.2f} | SMA200: ${sma200:.2f} => REGIME: {regime}"
+    )
 
     return {
         "regime": regime,
+        "spy_open": spy_open,
         "spy_0945": spy_0945,
         "sma50": sma50,
         "sma200": sma200,
-        "prev_close": prev_close
+        "prev_close": prev_close,
+        "is_red": is_red
     }
 
 def fetch_daily_metrics_batch(symbols=None):
     """
     Pre-market Warmup Batch:
-    Fetches 90-day daily bars for all 500 symbols in a single vectorized batch request.
+    Fetches 90-day daily bars for all symbols in a single vectorized batch request.
     Computes SMA50, ATR20, ATR%, Volume SMA20, and Previous Close.
     Benchmarked at ~1.87s for 500 tickers.
     """
@@ -158,7 +175,7 @@ def fetch_daily_metrics_batch(symbols=None):
 def fetch_intraday_or15_batch(symbols=None):
     """
     09:45:00 AM Precision Batch:
-    Fetches 15-minute 1-min bars for all 500 symbols in a single vectorized batch request.
+    Fetches 15-minute 1-min bars for all symbols in a single vectorized batch request.
     Computes Day Open, OR15 High, OR15 Low, OR15 Close, and OR15 Volume.
     Benchmarked at ~0.20s for 500 tickers.
     """
@@ -213,16 +230,19 @@ def fetch_intraday_or15_batch(symbols=None):
 
 def scan_all_candidates(macro_info, daily_cache=None):
     """
-    Screens the 500-ticker universe:
-    1. Reuses pre-fetched daily metrics (or fetches in batch if uncached).
-    2. Pulls 15m intraday bars in batch.
-    3. Filters for 100% compliant Strategy #3 setups.
-    4. SORTS QUALIFIED CANDIDATES BY SHARE PRICE ASCENDING (lowest dollar value first)
-       to maximize the quantity of tickers for the single full-share execution engine.
+    Screens the universe according to ORB-15 Cond 4 V2:
+    1. Excludes all tickers in TOXIC_BLACKLIST.
+    2. Reuses pre-fetched daily metrics (or fetches in batch if uncached).
+    3. Pulls 15m intraday bars in batch.
+    4. Filters for 100% compliant Cond 4 V2 setups:
+       - Long: Day_Open > SMA50, Gap between +0.3% and +4.5% (Circuit Breaker)
+       - Short: Day_Open < SMA50, Gap <= -0.3%
+       - Dynamic ATR Target = max(2.0%, min(4.5%, 1.5 * ATR%))
+    5. SORTS QUALIFIED CANDIDATES BY MOMENTUM SCORE DESCENDING (HIGHEST ALPHA FIRST!)
     """
     regime = macro_info["regime"]
     if regime == "NEUTRAL":
-        logger.info("Macro regime is NEUTRAL. Remaining 100% Cash.")
+        logger.info("Macro regime is NEUTRAL (Defensive Cash). Standing down 100% Cash.")
         return []
 
     # 1. Daily metrics
@@ -239,7 +259,7 @@ def scan_all_candidates(macro_info, daily_cache=None):
     logger.info(f"Screening cross-section for {regime} setups...")
 
     for sym in config.UNIVERSE:
-        if sym == "SPY":
+        if sym == "SPY" or sym in config.TOXIC_BLACKLIST:
             continue
         d = daily_metrics.get(sym)
         m = intraday_data.get(sym)
@@ -260,9 +280,12 @@ def scan_all_candidates(macro_info, daily_cache=None):
         day_open = m["day_open"]
         gap_pct = (day_open / prev_close) - 1.0
 
+        # Calculate Dynamic ATR-Scaled Profit Target
+        target_pct = config.get_dynamic_target_pct(d["atr_pct"])
+
         if regime == "BULLISH":
-            # Long Rules: Day_Open > SMA50, Gap >= +0.3%
-            if (day_open > d["sma50"]) and (gap_pct >= config.MIN_GAP_PCT):
+            # Long Rules: Day_Open > SMA50, Gap >= +0.3%, Gap <= +4.5% (Gap-and-Trap Breaker)
+            if (day_open > d["sma50"]) and (gap_pct >= config.MIN_GAP_PCT) and (gap_pct <= config.MAX_LONG_GAP):
                 is_green = m["or15_close"] > day_open
                 closeness = (m["or15_close"] / m["or15_high"]) if m["or15_high"] > 0 else 0.0
                 score = gap_pct * rvol_15 * (closeness ** 2) * (1.5 if is_green else 0.5)
@@ -274,7 +297,8 @@ def scan_all_candidates(macro_info, daily_cache=None):
                     "score": score,
                     "entry_stop": entry_stop,
                     "stop_loss": round(entry_stop * (1.0 - config.STOP_LOSS_PCT), 2),
-                    "take_profit": round(entry_stop * (1.0 + config.TAKE_PROFIT_PCT), 2),
+                    "take_profit": round(entry_stop * (1.0 + target_pct), 2),
+                    "target_pct": target_pct,
                     "or15_high": m["or15_high"],
                     "or15_low": m["or15_low"],
                     "gap_pct": gap_pct,
@@ -296,7 +320,8 @@ def scan_all_candidates(macro_info, daily_cache=None):
                     "score": score,
                     "entry_stop": entry_stop,
                     "stop_loss": round(entry_stop * (1.0 + config.STOP_LOSS_PCT), 2),
-                    "take_profit": round(entry_stop * (1.0 - config.TAKE_PROFIT_PCT), 2),
+                    "take_profit": round(entry_stop * (1.0 - target_pct), 2),
+                    "target_pct": target_pct,
                     "or15_high": m["or15_high"],
                     "or15_low": m["or15_low"],
                     "gap_pct": gap_pct,
@@ -306,12 +331,15 @@ def scan_all_candidates(macro_info, daily_cache=None):
 
     logger.info(f"Total fully qualified {regime} candidates found: {len(qualified_candidates)}")
 
-    # USER DIRECTIVE: Start orders with lowest dollar value share, then next lowest, and so on
-    # to maximize the quantity of tickers for the single full-share execution engine.
-    qualified_candidates.sort(key=lambda x: x["entry_stop"], reverse=False)
+    # SORT BY MOMENTUM SCORE DESCENDING (HIGHEST ALPHA FIRST!)
+    qualified_candidates.sort(key=lambda x: x["score"], reverse=True)
 
     for i, c in enumerate(qualified_candidates[:15], start=1):
-        logger.info(f"   Candidate #{i}: {c['symbol']:<5} | Share Price: ${c['entry_stop']:>7.2f} | Score: {c['score']:.4f} | RVOL: {c['rvol_15']:.2f}x")
+        logger.info(
+            f"   Rank #{i:>2}: {c['symbol']:<5} | Score: {c['score']:.4f} | "
+            f"Gap: {c['gap_pct']*100:>+5.2f}% | RVOL: {c['rvol_15']:>4.2f}x | "
+            f"Stop: ${c['entry_stop']:>7.2f} | Target: {c['target_pct']*100:.2f}%"
+        )
 
     return qualified_candidates
 
@@ -329,7 +357,7 @@ def run_scan(daily_cache=None):
     state["spy_sma50"] = macro["sma50"]
     state["spy_sma200"] = macro["sma200"]
     state["qualified_count"] = len(candidates)
-    state["qualified_candidates"] = [c["symbol"] for c in candidates[:config.MAX_POSITIONS]]
+    state["qualified_candidates"] = [c["symbol"] for c in candidates[:8]]
 
     if candidates:
         top1 = candidates[0]
@@ -363,12 +391,13 @@ def run_scan(daily_cache=None):
                 "entry_stop": c["entry_stop"],
                 "stop_loss": c["stop_loss"],
                 "take_profit": c["take_profit"],
+                "target_pct": c["target_pct"],
                 "gap_pct": c["gap_pct"],
                 "rvol15": c["rvol_15"],
                 "atr_pct": c["atr_pct"],
                 "score": c["score"]
             }
-            for idx, c in enumerate(candidates[:config.MAX_POSITIONS])
+            for idx, c in enumerate(candidates[:8])
         ]
     })
 

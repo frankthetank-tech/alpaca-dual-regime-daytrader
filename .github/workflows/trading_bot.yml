@@ -2,12 +2,12 @@ name: Strategy #3 Dual-Regime Long/Short Day Trading Bot
 
 on:
   schedule:
-    # 09:40 AM EDT = 13:40 UTC (Mon-Fri) -> Early Boot, 90-Day Pre-fetch & 09:45:00 AM Precision Execution
-    - cron: '40 13 * * 1-5'
+    # 09:25 AM EDT = 13:25 UTC (Mon-Fri) -> 20-min Warmup, 90-Day Pre-fetch & 09:45:04 AM Precision Execution
+    - cron: '25 13 * * 1-5'
     # 11:30 AM EDT = 15:30 UTC (Mon-Fri) -> Cancel Unfilled Resting Entry Orders (Remain 100% Cash)
     - cron: '30 15 * * 1-5'
-    # 03:45 PM EDT = 19:45 UTC (Mon-Fri) -> Early Boot & Market-on-Close (MOC) Liquidation (100% Cash Overnight)
-    - cron: '45 19 * * 1-5'
+    # 03:30 PM EDT = 19:30 UTC (Mon-Fri) -> Early Boot & Market-on-Close (MOC) Liquidation (100% Cash Overnight)
+    - cron: '30 19 * * 1-5'
   workflow_dispatch:
     inputs:
       action:

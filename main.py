@@ -1,6 +1,6 @@
 """
-Strategy #3: Dual-Regime Long/Short Day Trading Bot
-CLI Interface, Early Warmup & 09:45:00 AM Precision Synchronization
+Strategy #3: Dual-Regime Long/Short Day Trading Bot (ORB-15 Cond 4 V2)
+CLI Interface, Early Warmup & 09:45:04 AM Precision Synchronization
 """
 
 import sys
@@ -8,6 +8,7 @@ import time
 import argparse
 import logging
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 from alpaca.trading.client import TradingClient
 
@@ -18,48 +19,52 @@ import executor
 import audit_logger
 
 logger = logging.getLogger("DualRegime.Main")
+NY_TZ = ZoneInfo("America/New_York")
 
-def sync_to_target_time(target_hour_utc=13, target_minute_utc=45, target_second_utc=0):
+def sync_to_target_time(target_hour_ny=9, target_minute_ny=45, target_second_ny=4):
     """
-    Precision countdown synchronization to hit 09:45:00.000 AM EDT (13:45:00 UTC) sharp.
+    Timezone-aware countdown synchronization to hit 09:45:04 AM New York time sharp
+    (includes 4-second aggregation buffer to ensure 09:44 bar is published by Alpaca).
     Pre-sleeps with periodic logging, then precision-spins for the last 2 seconds.
     """
-    now = datetime.now(timezone.utc)
-    target = now.replace(
-        hour=target_hour_utc,
-        minute=target_minute_utc,
-        second=target_second_utc,
+    now_ny = datetime.now(NY_TZ)
+    target_ny = now_ny.replace(
+        hour=target_hour_ny,
+        minute=target_minute_ny,
+        second=target_second_ny,
         microsecond=0
     )
+    target_utc = target_ny.astimezone(timezone.utc)
+    now_utc = datetime.now(timezone.utc)
 
-    remaining = (target - now).total_seconds()
+    remaining = (target_utc - now_utc).total_seconds()
     if remaining <= 0:
-        logger.info(f"Target timestamp ({target.strftime('%H:%M:%S')} UTC) already reached. Executing immediately.")
+        logger.info(f"Target timestamp ({target_ny.strftime('%H:%M:%S %Z')}) already reached. Executing immediately.")
         audit_logger.record_event("COUNTDOWN_SYNC", {
-            "target": target.strftime('%H:%M:%S UTC'),
-            "awaken_utc": now.strftime('%H:%M:%S.%f')[:-3],
+            "target": target_ny.strftime('%H:%M:%S %Z'),
+            "awaken_utc": now_utc.strftime('%H:%M:%S.%f')[:-3],
             "drift_ms": abs(remaining) * 1000.0
         })
         return
 
-    logger.info(f"Synchronizing to target execution time {target.strftime('%H:%M:%S')} UTC (09:45:00 AM EDT sharp). Remaining: {remaining:.1f}s")
+    logger.info(f"Synchronizing to target execution time {target_ny.strftime('%H:%M:%S %Z')}. Remaining: {remaining:.1f}s")
 
     while remaining > 3.0:
         sleep_dur = min(15.0, remaining - 2.0)
         time.sleep(sleep_dur)
-        now = datetime.now(timezone.utc)
-        remaining = (target - now).total_seconds()
-        logger.info(f"Countdown to 09:45:00 AM EDT: {remaining:.1f} seconds remaining...")
+        now_utc = datetime.now(timezone.utc)
+        remaining = (target_utc - now_utc).total_seconds()
+        logger.info(f"Countdown to {target_ny.strftime('%H:%M:%S %Z')}: {remaining:.1f} seconds remaining...")
 
     # High-precision spin for final seconds
-    while datetime.now(timezone.utc) < target:
+    while datetime.now(timezone.utc) < target_utc:
         time.sleep(0.002)
 
     awakened = datetime.now(timezone.utc)
-    drift_ms = (awakened - target).total_seconds() * 1000.0
-    logger.info(f"TARGET TIME REACHED! Awakened at {awakened.strftime('%H:%M:%S.%f')[:-3]} UTC (Drift: {drift_ms:+.2f} ms). Triggering scan...")
+    drift_ms = (awakened - target_utc).total_seconds() * 1000.0
+    logger.info(f"TARGET TIME REACHED! Awakened at {datetime.now(NY_TZ).strftime('%H:%M:%S.%f')[:-3]} EDT (Drift: {drift_ms:+.2f} ms). Triggering scan...")
     audit_logger.record_event("COUNTDOWN_SYNC", {
-        "target": target.strftime('%H:%M:%S UTC'),
+        "target": target_ny.strftime('%H:%M:%S %Z'),
         "awaken_utc": awakened.strftime('%H:%M:%S.%f')[:-3],
         "drift_ms": drift_ms
     })
@@ -80,7 +85,8 @@ def show_status():
         print(f"Account Status:       {account.status}")
         print(f"Account Equity:       ${float(account.equity):,.2f}")
         print(f"Cash Balance:         ${float(account.cash):,.2f}")
-        print(f"Buying Power:         ${float(account.buying_power):,.2f}")
+        print(f"Buying Power:         ${float(account.buying_power):,.2f} ({config.BUYING_POWER_MULT:.1f}x Multiplier)")
+        print(f"Dynamic Tier Max Pos: {config.get_max_positions(float(account.cash))} positions max")
         print(f"Active Positions:     {len(positions)}")
         for p in positions:
             print(f"   -> {p.symbol:<6} ({p.side.upper()}) | Qty: {p.qty:>6} | Current Price: ${float(p.current_price):>8.2f} | P/L: ${float(p.unrealized_pl):>8.2f}")
@@ -108,11 +114,11 @@ def show_status():
     print("=" * 80)
 
 def main():
-    parser = argparse.ArgumentParser(description="Strategy #3: Dual-Regime Long/Short Day Trading Bot")
-    parser.add_argument("--warmup", action="store_true", help="Run 09:40 AM pre-market warmup, pre-fetch daily metrics, and sync to 09:45:00 AM sharp")
+    parser = argparse.ArgumentParser(description="Strategy #3: Dual-Regime Long/Short Day Trading Bot (ORB-15 Cond 4 V2)")
+    parser.add_argument("--warmup", action="store_true", help="Run 09:25 AM pre-market warmup, pre-fetch daily metrics, and sync to 09:45:04 AM sharp")
     parser.add_argument("--scan", action="store_true", help="Run 09:45 AM scan and multi-order placement directly")
     parser.add_argument("--cutoff", action="store_true", help="Run 11:30 AM order cutoff to cancel unfilled entries")
-    parser.add_argument("--moc", action="store_true", help="Run 15:55 PM Market-on-Close liquidation (100%% flat)")
+    parser.add_argument("--moc", action="store_true", help="Run 15:45 PM Market-on-Close liquidation (100%% flat)")
     parser.add_argument("--status", action="store_true", help="Display current account and strategy status")
     parser.add_argument("--dry-run", action="store_true", help="Dry run without submitting real orders")
     parser.add_argument("--test", action="store_true", help="Test connection and credentials")
@@ -130,18 +136,18 @@ def main():
     elif args.status or args.test:
         show_status()
     elif args.warmup:
-        logger.info("Initializing 09:40 AM Pre-Market Warmup Cycle...")
+        logger.info("Initializing Pre-Market Warmup Cycle (09:25 AM EDT lead time)...")
         audit_logger.record_event("WARMUP_INIT", {
             "boot_time": datetime.now(timezone.utc).isoformat(),
             "dry_run": args.dry_run
         })
         # 1. Pre-fetch daily bars during warmup window (0 market seconds)
         daily_cache = scanner.fetch_daily_metrics_batch(config.UNIVERSE)
-        # 2. Synchronize to 09:45:00 AM EDT (13:45:00 UTC) sharp
-        sync_to_target_time(target_hour_utc=13, target_minute_utc=45, target_second_utc=0)
+        # 2. Synchronize to 09:45:04 AM NY time (4-second aggregation buffer)
+        sync_to_target_time(target_hour_ny=9, target_minute_ny=45, target_second_ny=4)
         # 3. Pull 15m intraday bars and screen
         candidates = scanner.run_scan(daily_cache=daily_cache)
-        # 4. Multi-order throttled submission
+        # 4. Multi-order throttled submission using dynamic tier sizing
         if candidates:
             executor.submit_entry_brackets_multi(candidates, dry_run=args.dry_run)
     elif args.scan:
