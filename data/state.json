@@ -1,247 +1,37 @@
 {
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "macro_regime": "BULLISH",
-  "spy_0945": 763.48,
-  "spy_sma50": 762.7071000000001,
-  "spy_sma200": 719.5841499999999,
-  "selected_candidate": "CLOU",
+  "spy_0945": 771.63,
+  "spy_sma50": 763.0392999999999,
+  "spy_sma200": 719.9956500000001,
+  "selected_candidate": "NVDA",
   "direction": "LONG",
-  "entry_stop_price": 28.95,
-  "stop_loss_price": 28.6,
-  "take_profit_price": 29.96,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 237.47,
+  "stop_loss_price": 234.62,
+  "take_profit_price": 245.79,
+  "order_status": "1_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-01T19:55:14.394153",
-  "qualified_count": 30,
+  "last_updated": "2026-10-02T13:45:11.382978",
+  "qualified_count": 31,
   "qualified_candidates": [
-    "CLOU",
-    "GTLB",
-    "CIBR",
-    "IGV",
-    "XLC",
-    "HACK",
-    "NOW",
-    "DUOL",
-    "JCI",
-    "SHOP",
-    "EWY",
-    "QCOM",
-    "PLTR",
-    "KLAC",
-    "OKTA",
     "NVDA",
-    "ALNY",
-    "MRVL",
-    "DDOG",
-    "ARM",
-    "LRCX",
-    "CDNS",
-    "GOOG",
-    "GOOGL",
-    "SNPS",
-    "MSFT",
-    "AMAT",
+    "CAT",
+    "AMD",
+    "TSLA",
     "SMH",
-    "META",
-    "MCK"
+    "AMAT",
+    "SOXX",
+    "HOOD"
   ],
   "active_orders": [
     {
-      "id": "dd8f4f5f-6341-4f7b-98ca-3d8abd520c9d",
-      "symbol": "CLOU",
-      "qty": 1,
-      "price": 28.95,
-      "direction": "LONG"
-    },
-    {
-      "id": "f6d95dca-afc8-4ada-ab1a-1e6a5b8c34a1",
-      "symbol": "GTLB",
-      "qty": 1,
-      "price": 48.3,
-      "direction": "LONG"
-    },
-    {
-      "id": "2971ec3d-2449-4354-b39b-e5a52145ad57",
-      "symbol": "CIBR",
-      "qty": 1,
-      "price": 104.2,
-      "direction": "LONG"
-    },
-    {
-      "id": "730ce221-036c-48f2-b152-f754293dbd4d",
-      "symbol": "IGV",
-      "qty": 1,
-      "price": 108.26,
-      "direction": "LONG"
-    },
-    {
-      "id": "1a252d9c-8d21-40fa-ae6d-cab5b158cb34",
-      "symbol": "XLC",
-      "qty": 1,
-      "price": 111.83,
-      "direction": "LONG"
-    },
-    {
-      "id": "aea2ede4-32b5-46e1-b297-119ad1695e27",
-      "symbol": "HACK",
-      "qty": 1,
-      "price": 121.8,
-      "direction": "LONG"
-    },
-    {
-      "id": "4509937b-acf7-4504-8ea5-1cc1695be866",
-      "symbol": "NOW",
-      "qty": 1,
-      "price": 140.68,
-      "direction": "LONG"
-    },
-    {
-      "id": "b678169a-d968-496d-a1d0-b3e97d19bec7",
-      "symbol": "DUOL",
-      "qty": 1,
-      "price": 147.25,
-      "direction": "LONG"
-    },
-    {
-      "id": "88662def-5297-4560-a137-6b80d008e442",
-      "symbol": "SHOP",
-      "qty": 1,
-      "price": 152.56,
-      "direction": "LONG"
-    },
-    {
-      "id": "2bf7b408-81da-4745-8c7f-fa649a9deff0",
-      "symbol": "EWY",
-      "qty": 1,
-      "price": 184.94,
-      "direction": "LONG"
-    },
-    {
-      "id": "89db5713-ec7e-4d07-b056-2ccc92107ce2",
-      "symbol": "QCOM",
-      "qty": 1,
-      "price": 185.16,
-      "direction": "LONG"
-    },
-    {
-      "id": "8e1b666a-abff-4285-9bad-2d61d5b53a3e",
-      "symbol": "PLTR",
-      "qty": 1,
-      "price": 189.5,
-      "direction": "LONG"
-    },
-    {
-      "id": "cf2bda34-15b4-4718-a385-b988895da0e6",
-      "symbol": "KLAC",
-      "qty": 1,
-      "price": 199.78,
-      "direction": "LONG"
-    },
-    {
-      "id": "a9a45329-8cf6-4225-91fb-607ae1115722",
-      "symbol": "OKTA",
-      "qty": 1,
-      "price": 210.46,
-      "direction": "LONG"
-    },
-    {
-      "id": "9bfa8055-c9eb-4689-bacf-0a0db8f9f99b",
+      "id": "4049afcd-fe39-47de-8ec0-092f3ccc5818",
       "symbol": "NVDA",
-      "qty": 1,
-      "price": 231.54,
-      "direction": "LONG"
-    },
-    {
-      "id": "e77f0e62-ed1b-463d-8896-20276fe6e65c",
-      "symbol": "ALNY",
-      "qty": 1,
-      "price": 250.52,
-      "direction": "LONG"
-    },
-    {
-      "id": "dbeb3758-5fb7-46d6-a7f8-82deabb6fa3e",
-      "symbol": "MRVL",
-      "qty": 1,
-      "price": 265.8,
-      "direction": "LONG"
-    },
-    {
-      "id": "eeaa2e5f-68d4-4c79-a751-37677c0c2902",
-      "symbol": "DDOG",
-      "qty": 1,
-      "price": 278.0,
-      "direction": "LONG"
-    },
-    {
-      "id": "fc67e6b6-2c94-432f-8c85-7dfe58e91cb9",
-      "symbol": "ARM",
-      "qty": 1,
-      "price": 293.52,
-      "direction": "LONG"
-    },
-    {
-      "id": "9ff29c7d-d27b-4113-a4e9-88477f79c5d6",
-      "symbol": "LRCX",
-      "qty": 1,
-      "price": 340.51,
-      "direction": "LONG"
-    },
-    {
-      "id": "4902bbe7-eead-457a-a6d0-fe9e98c203a8",
-      "symbol": "CDNS",
-      "qty": 1,
-      "price": 349.21,
-      "direction": "LONG"
-    },
-    {
-      "id": "91f57402-d661-4e54-8f1f-6cf3dd7474f1",
-      "symbol": "GOOG",
-      "qty": 1,
-      "price": 350.0,
-      "direction": "LONG"
-    },
-    {
-      "id": "7bcc2ff9-c6d3-4293-b589-13d53630a621",
-      "symbol": "GOOGL",
-      "qty": 1,
-      "price": 352.99,
-      "direction": "LONG"
-    },
-    {
-      "id": "83568177-c8b1-45f2-af09-2dfcb61b9b22",
-      "symbol": "MSFT",
-      "qty": 1,
-      "price": 522.8,
-      "direction": "LONG"
-    },
-    {
-      "id": "de09d277-a6f6-46ec-a185-9152829415fe",
-      "symbol": "AMAT",
-      "qty": 1,
-      "price": 530.46,
-      "direction": "LONG"
-    },
-    {
-      "id": "cc76b326-3c7b-4074-a0de-0516a1344b7c",
-      "symbol": "SMH",
-      "qty": 1,
-      "price": 614.41,
-      "direction": "LONG"
-    },
-    {
-      "id": "a8c115fc-2d02-4358-b486-75e0dcd843d8",
-      "symbol": "META",
-      "qty": 1,
-      "price": 735.63,
-      "direction": "LONG"
-    },
-    {
-      "id": "e827f233-816e-47a8-a393-84a215228399",
-      "symbol": "MCK",
-      "qty": 1,
-      "price": 923.22,
-      "direction": "LONG"
+      "qty": 41,
+      "price": 237.47,
+      "direction": "LONG",
+      "cost": 9736.27
     }
   ],
-  "capital_committed": 7972.280000000002
+  "capital_committed": 9736.27
 }
