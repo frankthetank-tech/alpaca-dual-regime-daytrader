@@ -59,7 +59,7 @@ def submit_entry_brackets_multi(candidates, dry_run=False):
         logger.info("Zero candidates selected for execution.")
         return []
 
-    alloc_per_pos = buying_power / n_pos
+    alloc_per_pos = buying_power / float(max_positions)
 
     logger.info("=" * 80)
     logger.info("BEGINNING DYNAMIC TIER MULTI-ORDER BRACKET PLACEMENT")

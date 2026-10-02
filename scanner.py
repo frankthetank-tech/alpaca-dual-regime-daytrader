@@ -287,7 +287,8 @@ def scan_all_candidates(macro_info, daily_cache=None):
             # Long Rules: Day_Open > SMA50, Gap >= +0.3%, Gap <= +4.5% (Gap-and-Trap Breaker)
             if (day_open > d["sma50"]) and (gap_pct >= config.MIN_GAP_PCT) and (gap_pct <= config.MAX_LONG_GAP):
                 is_green = m["or15_close"] > day_open
-                closeness = (m["or15_close"] / m["or15_high"]) if m["or15_high"] > 0 else 0.0
+                or15_range = m["or15_high"] - m["or15_low"]
+                closeness = ((m["or15_close"] - m["or15_low"]) / or15_range) if or15_range > 0 else 0.0
                 score = gap_pct * rvol_15 * (closeness ** 2) * (1.5 if is_green else 0.5)
                 entry_stop = round(m["or15_high"], 2)
 
@@ -307,10 +308,11 @@ def scan_all_candidates(macro_info, daily_cache=None):
                 })
 
         elif regime == "BEARISH":
-            # Short Rules: Day_Open < SMA50, Gap <= -0.3%
-            if (day_open < d["sma50"]) and (gap_pct <= -config.MIN_GAP_PCT):
+            # Short Rules: Day_Open < SMA50, Gap <= -0.3%, Gap >= -4.5% (Gap-and-Trap Breaker)
+            if (day_open < d["sma50"]) and (gap_pct <= -config.MIN_GAP_PCT) and (gap_pct >= config.MAX_SHORT_GAP):
                 is_red = m["or15_close"] < day_open
-                closeness = (m["or15_low"] / m["or15_close"]) if m["or15_close"] > 0 else 0.0
+                or15_range = m["or15_high"] - m["or15_low"]
+                closeness = ((m["or15_high"] - m["or15_close"]) / or15_range) if or15_range > 0 else 0.0
                 score = abs(gap_pct) * rvol_15 * (closeness ** 2) * (1.5 if is_red else 0.5)
                 entry_stop = round(m["or15_low"], 2)
 

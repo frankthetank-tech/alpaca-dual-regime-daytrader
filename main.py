@@ -21,9 +21,9 @@ import audit_logger
 logger = logging.getLogger("DualRegime.Main")
 NY_TZ = ZoneInfo("America/New_York")
 
-def sync_to_target_time(target_hour_ny=9, target_minute_ny=45, target_second_ny=4):
+def sync_to_target_time(target_hour_ny=9, target_minute_ny=45, target_second_ny=6):
     """
-    Timezone-aware countdown synchronization to hit 09:45:04 AM New York time sharp
+    Timezone-aware countdown synchronization to hit 09:45:06 AM New York time sharp
     (includes 4-second aggregation buffer to ensure 09:44 bar is published by Alpaca).
     Pre-sleeps with periodic logging, then precision-spins for the last 2 seconds.
     """
@@ -143,8 +143,8 @@ def main():
         })
         # 1. Pre-fetch daily bars during warmup window (0 market seconds)
         daily_cache = scanner.fetch_daily_metrics_batch(config.UNIVERSE)
-        # 2. Synchronize to 09:45:04 AM NY time (4-second aggregation buffer)
-        sync_to_target_time(target_hour_ny=9, target_minute_ny=45, target_second_ny=4)
+        # 2. Synchronize to 09:45:06 AM NY time (6-second aggregation buffer)
+        sync_to_target_time(target_hour_ny=9, target_minute_ny=45, target_second_ny=6)
         # 3. Pull 15m intraday bars and screen
         candidates = scanner.run_scan(daily_cache=daily_cache)
         # 4. Multi-order throttled submission using dynamic tier sizing

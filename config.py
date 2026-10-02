@@ -50,6 +50,7 @@ MIN_ATR_PCT = 0.015            # 20-day ATR% >= 1.5%
 MIN_RVOL_15 = 1.25             # First 15-minute RVOL >= 1.25x
 MIN_GAP_PCT = 0.003            # Minimum gap magnitude >= 0.3%
 MAX_LONG_GAP = 0.045           # Gap-and-Trap Circuit Breaker: Max long gap <= 4.5%
+MAX_SHORT_GAP = -0.045         # Gap-and-Trap Circuit Breaker: Max short gap >= -4.5%
 
 # Multi-Order Execution & Throttling
 ORDER_THROTTLE_RATE = 6.0      # 6 orders per second (0.167s interval between submissions)
