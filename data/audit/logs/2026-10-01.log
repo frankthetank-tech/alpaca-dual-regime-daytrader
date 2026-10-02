@@ -118,3 +118,4 @@
 2026-10-01 19:55:14 [INFO] [DualRegime.Executor] Cancelled all open orders before MOC liquidation.
 2026-10-01 19:55:14 [INFO] [DualRegime.Executor] Liquidated 6 open positions via Market-on-Close. Account is 100% Cash.
 2026-10-01 19:55:14 [INFO] [DualRegime.State] State saved successfully to /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/state.json
+2026-10-02 03:50:12 [INFO] [DualRegime.Audit] Initialized daily audit logging -> /home/runner/work/alpaca-dual-regime-daytrader/alpaca-dual-regime-daytrader/data/audit/logs/2026-10-01.log
