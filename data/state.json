@@ -9,9 +9,9 @@
   "entry_stop_price": 237.47,
   "stop_loss_price": 234.62,
   "take_profit_price": 245.79,
-  "order_status": "1_ORDERS_PLACED",
+  "order_status": "CLOSED_MOC",
   "order_id": null,
-  "last_updated": "2026-10-02T15:42:19.792720",
+  "last_updated": "2026-10-02T19:44:39.324874",
   "qualified_count": 31,
   "qualified_candidates": [
     "NVDA",
