@@ -9,9 +9,9 @@
   "entry_stop_price": 44.15,
   "stop_loss_price": 43.62,
   "take_profit_price": 46.14,
-  "order_status": "1_ORDERS_PLACED",
+  "order_status": "EXPIRED",
   "order_id": null,
-  "last_updated": "2026-10-05T13:45:10.424706",
+  "last_updated": "2026-10-05T15:43:36.832197",
   "qualified_count": 15,
   "qualified_candidates": [
     "IOT",
