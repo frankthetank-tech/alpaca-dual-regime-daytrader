@@ -1,37 +1,37 @@
 {
-  "date": "2026-10-02",
+  "date": "2026-10-05",
   "macro_regime": "BULLISH",
-  "spy_0945": 771.63,
-  "spy_sma50": 763.0392999999999,
-  "spy_sma200": 719.9956500000001,
-  "selected_candidate": "NVDA",
+  "spy_0945": 770.61,
+  "spy_sma50": 763.6711,
+  "spy_sma200": 720.440325,
+  "selected_candidate": "IOT",
   "direction": "LONG",
-  "entry_stop_price": 237.47,
-  "stop_loss_price": 234.62,
-  "take_profit_price": 245.79,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 44.15,
+  "stop_loss_price": 43.62,
+  "take_profit_price": 46.14,
+  "order_status": "1_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-02T19:44:39.324874",
-  "qualified_count": 31,
+  "last_updated": "2026-10-05T13:45:10.424706",
+  "qualified_count": 15,
   "qualified_candidates": [
+    "IOT",
+    "MSFT",
+    "STX",
     "NVDA",
-    "CAT",
-    "AMD",
-    "TSLA",
-    "SMH",
-    "AMAT",
-    "SOXX",
-    "HOOD"
+    "SHOP",
+    "S",
+    "SNPS",
+    "EEM"
   ],
   "active_orders": [
     {
-      "id": "4049afcd-fe39-47de-8ec0-092f3ccc5818",
-      "symbol": "NVDA",
-      "qty": 41,
-      "price": 237.47,
+      "id": "dcff5287-6936-4f5c-a33f-c49290de2f3a",
+      "symbol": "IOT",
+      "qty": 219,
+      "price": 44.15,
       "direction": "LONG",
-      "cost": 9736.27
+      "cost": 9668.85
     }
   ],
-  "capital_committed": 9736.27
+  "capital_committed": 9668.85
 }
