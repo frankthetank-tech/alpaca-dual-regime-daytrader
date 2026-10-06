@@ -9,9 +9,9 @@
   "entry_stop_price": 128.45,
   "stop_loss_price": 126.91,
   "take_profit_price": 133.21,
-  "order_status": "EXPIRED",
+  "order_status": "CLOSED_MOC",
   "order_id": null,
-  "last_updated": "2026-10-06T15:41:23.009798",
+  "last_updated": "2026-10-06T19:44:00.763197",
   "qualified_count": 33,
   "qualified_candidates": [
     "HACK",
