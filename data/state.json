@@ -9,9 +9,9 @@
   "entry_stop_price": 147.66,
   "stop_loss_price": 145.89,
   "take_profit_price": 152.41,
-  "order_status": "EXPIRED",
+  "order_status": "CLOSED_MOC",
   "order_id": null,
-  "last_updated": "2026-10-07T15:47:47.440607",
+  "last_updated": "2026-10-07T19:43:47.386748",
   "qualified_count": 8,
   "qualified_candidates": [
     "GILD",
