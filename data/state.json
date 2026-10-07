@@ -1,45 +1,45 @@
 {
-  "date": "2026-10-06",
+  "date": "2026-10-07",
   "macro_regime": "BULLISH",
-  "spy_0945": 778.63,
-  "spy_sma50": 764.3925,
-  "spy_sma200": 720.9208750000001,
-  "selected_candidate": "HACK",
+  "spy_0945": 774.7,
+  "spy_sma50": 765.1975,
+  "spy_sma200": 721.4592250000001,
+  "selected_candidate": "GILD",
   "direction": "LONG",
-  "entry_stop_price": 128.45,
-  "stop_loss_price": 126.91,
-  "take_profit_price": 133.21,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 147.66,
+  "stop_loss_price": 145.89,
+  "take_profit_price": 152.41,
+  "order_status": "2_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-06T19:44:00.763197",
-  "qualified_count": 33,
+  "last_updated": "2026-10-07T13:45:13.158973",
+  "qualified_count": 8,
   "qualified_candidates": [
-    "HACK",
-    "ILMN",
-    "CRWD",
-    "DELL",
-    "CCL",
-    "PANW",
-    "CIBR",
-    "FTNT"
+    "GILD",
+    "HUM",
+    "PFE",
+    "BIIB",
+    "AAPL",
+    "VLO",
+    "TMO",
+    "MO"
   ],
   "active_orders": [
     {
-      "id": "2e9e98cd-ea84-4070-8be4-3e7666abd3df",
-      "symbol": "HACK",
-      "qty": 75,
-      "price": 128.45,
+      "id": "e59f39ce-8972-4f14-8439-88cce2b0816f",
+      "symbol": "GILD",
+      "qty": 64,
+      "price": 147.66,
       "direction": "LONG",
-      "cost": 9633.75
+      "cost": 9450.24
     },
     {
-      "id": "d516c548-6263-45df-84ea-a40d421af6d4",
-      "symbol": "ILMN",
-      "qty": 31,
-      "price": 308.57,
+      "id": "8c521afe-4101-40f7-9927-afd2ed825e7b",
+      "symbol": "HUM",
+      "qty": 23,
+      "price": 410.0,
       "direction": "LONG",
-      "cost": 9565.67
+      "cost": 9430.0
     }
   ],
-  "capital_committed": 19199.42
+  "capital_committed": 18880.239999999998
 }
