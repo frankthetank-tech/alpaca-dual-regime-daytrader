@@ -9,9 +9,9 @@
   "entry_stop_price": 100.16,
   "stop_loss_price": 98.96,
   "take_profit_price": 102.68,
-  "order_status": "EXPIRED",
+  "order_status": "CLOSED_MOC",
   "order_id": null,
-  "last_updated": "2026-10-08T15:44:14.770225",
+  "last_updated": "2026-10-08T19:45:31.748042",
   "qualified_count": 7,
   "qualified_candidates": [
     "SHEL",
