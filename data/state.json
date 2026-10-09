@@ -9,9 +9,9 @@
   "entry_stop_price": 387.19,
   "stop_loss_price": 382.54,
   "take_profit_price": 403.83,
-  "order_status": "0_ORDERS_PLACED",
+  "order_status": "CLOSED_MOC",
   "order_id": null,
-  "last_updated": "2026-10-09T15:43:48.762061",
+  "last_updated": "2026-10-09T19:44:32.487380",
   "qualified_count": 30,
   "qualified_candidates": [
     "TSLA",
