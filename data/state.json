@@ -1,44 +1,28 @@
 {
-  "date": "2026-10-08",
+  "date": "2026-10-09",
   "macro_regime": "BULLISH",
-  "spy_0945": 774.69,
-  "spy_sma50": 765.9246,
-  "spy_sma200": 721.9624,
-  "selected_candidate": "SHEL",
+  "spy_0945": 775.58,
+  "spy_sma50": 766.8108,
+  "spy_sma200": 722.4292,
+  "selected_candidate": "TSLA",
   "direction": "LONG",
-  "entry_stop_price": 100.16,
-  "stop_loss_price": 98.96,
-  "take_profit_price": 102.68,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 387.19,
+  "stop_loss_price": 382.54,
+  "take_profit_price": 403.83,
+  "order_status": "0_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-08T19:45:31.748042",
-  "qualified_count": 7,
+  "last_updated": "2026-10-09T13:45:10.939256",
+  "qualified_count": 30,
   "qualified_candidates": [
-    "SHEL",
+    "TSLA",
+    "SNAP",
+    "CEG",
+    "MRNA",
     "EQNR",
-    "VLO",
-    "MO",
-    "DVN",
-    "META",
-    "GOOGL"
+    "JCI",
+    "CI",
+    "RBLX"
   ],
-  "active_orders": [
-    {
-      "id": "7d5eeb08-abe5-49a0-8392-fc64e762b769",
-      "symbol": "SHEL",
-      "qty": 95,
-      "price": 100.16,
-      "direction": "LONG",
-      "cost": 9515.199999999999
-    },
-    {
-      "id": "9b37b180-2f8f-4267-9324-625b38bd4155",
-      "symbol": "EQNR",
-      "qty": 220,
-      "price": 43.12,
-      "direction": "LONG",
-      "cost": 9486.4
-    }
-  ],
-  "capital_committed": 19001.6
+  "active_orders": [],
+  "capital_committed": 0.0
 }
