@@ -1,28 +1,45 @@
 {
-  "date": "2026-10-09",
+  "date": "2026-10-12",
   "macro_regime": "BULLISH",
-  "spy_0945": 775.58,
-  "spy_sma50": 766.8108,
-  "spy_sma200": 722.4292,
-  "selected_candidate": "TSLA",
+  "spy_0945": 779.15,
+  "spy_sma50": 767.5484,
+  "spy_sma200": 722.8982,
+  "selected_candidate": "SNAP",
   "direction": "LONG",
-  "entry_stop_price": 387.19,
-  "stop_loss_price": 382.54,
-  "take_profit_price": 403.83,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 6.49,
+  "stop_loss_price": 6.41,
+  "take_profit_price": 6.78,
+  "order_status": "2_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-09T19:44:32.487380",
-  "qualified_count": 30,
+  "last_updated": "2026-10-12T13:52:11.949458",
+  "qualified_count": 19,
   "qualified_candidates": [
-    "TSLA",
     "SNAP",
-    "CEG",
-    "MRNA",
-    "EQNR",
-    "JCI",
-    "CI",
-    "RBLX"
+    "META",
+    "OVV",
+    "DBC",
+    "SHEL",
+    "SHOP",
+    "AAPL",
+    "IOT"
   ],
-  "active_orders": [],
-  "capital_committed": 0.0
+  "active_orders": [
+    {
+      "id": "2855f4b5-650b-4227-9df8-dfbb8b3381c3",
+      "symbol": "SNAP",
+      "qty": 1464,
+      "price": 6.49,
+      "direction": "LONG",
+      "cost": 9501.36
+    },
+    {
+      "id": "61725703-a00b-49fb-83da-0b7e375dd6e9",
+      "symbol": "META",
+      "qty": 12,
+      "price": 746.5,
+      "direction": "LONG",
+      "cost": 8958.0
+    }
+  ],
+  "capital_committed": 18459.36
 }
