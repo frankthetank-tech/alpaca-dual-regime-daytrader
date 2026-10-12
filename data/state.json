@@ -9,9 +9,9 @@
   "entry_stop_price": 6.49,
   "stop_loss_price": 6.41,
   "take_profit_price": 6.78,
-  "order_status": "2_ORDERS_PLACED",
+  "order_status": "EXPIRED",
   "order_id": null,
-  "last_updated": "2026-10-12T13:52:11.949458",
+  "last_updated": "2026-10-12T15:45:53.345411",
   "qualified_count": 19,
   "qualified_candidates": [
     "SNAP",
