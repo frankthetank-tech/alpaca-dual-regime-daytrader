@@ -1,45 +1,45 @@
 {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "macro_regime": "BULLISH",
-  "spy_0945": 779.15,
-  "spy_sma50": 767.5484,
-  "spy_sma200": 722.8982,
-  "selected_candidate": "SNAP",
+  "spy_0945": 778.34,
+  "spy_sma50": 768.1732000000001,
+  "spy_sma200": 723.3487999999999,
+  "selected_candidate": "HACK",
   "direction": "LONG",
-  "entry_stop_price": 6.49,
-  "stop_loss_price": 6.41,
-  "take_profit_price": 6.78,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 129.17,
+  "stop_loss_price": 127.62,
+  "take_profit_price": 133.88,
+  "order_status": "2_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-12T19:46:07.937507",
-  "qualified_count": 19,
+  "last_updated": "2026-10-13T13:47:06.574700",
+  "qualified_count": 20,
   "qualified_candidates": [
-    "SNAP",
-    "META",
-    "OVV",
-    "DBC",
-    "SHEL",
-    "SHOP",
-    "AAPL",
-    "IOT"
+    "HACK",
+    "MSFT",
+    "CRM",
+    "COR",
+    "CNC",
+    "SPOT",
+    "DVN",
+    "EQNR"
   ],
   "active_orders": [
     {
-      "id": "2855f4b5-650b-4227-9df8-dfbb8b3381c3",
-      "symbol": "SNAP",
-      "qty": 1464,
-      "price": 6.49,
+      "id": "c594140c-3530-44a6-9d82-5b5b80e4c832",
+      "symbol": "HACK",
+      "qty": 72,
+      "price": 129.17,
       "direction": "LONG",
-      "cost": 9501.36
+      "cost": 9300.24
     },
     {
-      "id": "61725703-a00b-49fb-83da-0b7e375dd6e9",
-      "symbol": "META",
-      "qty": 12,
-      "price": 746.5,
+      "id": "bb41ad3f-d9b7-460c-b1f5-72596433c4f4",
+      "symbol": "MSFT",
+      "qty": 16,
+      "price": 551.01,
       "direction": "LONG",
-      "cost": 8958.0
+      "cost": 8816.16
     }
   ],
-  "capital_committed": 18459.36
+  "capital_committed": 18116.4
 }
