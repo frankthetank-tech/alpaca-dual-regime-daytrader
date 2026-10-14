@@ -1,45 +1,37 @@
 {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "macro_regime": "BULLISH",
-  "spy_0945": 778.34,
-  "spy_sma50": 768.1732000000001,
-  "spy_sma200": 723.3487999999999,
-  "selected_candidate": "HACK",
+  "spy_0945": 775.37,
+  "spy_sma50": 768.5794000000001,
+  "spy_sma200": 723.7876,
+  "selected_candidate": "AAPL",
   "direction": "LONG",
-  "entry_stop_price": 129.17,
-  "stop_loss_price": 127.62,
-  "take_profit_price": 133.88,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 347.09,
+  "stop_loss_price": 342.92,
+  "take_profit_price": 356.88,
+  "order_status": "1_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-13T19:58:34.471334",
-  "qualified_count": 20,
+  "last_updated": "2026-10-14T13:56:07.790546",
+  "qualified_count": 11,
   "qualified_candidates": [
-    "HACK",
-    "MSFT",
-    "CRM",
-    "COR",
+    "AAPL",
+    "PFE",
+    "WMT",
     "CNC",
-    "SPOT",
-    "DVN",
-    "EQNR"
+    "CME",
+    "ELV",
+    "MRNA",
+    "KMI"
   ],
   "active_orders": [
     {
-      "id": "c594140c-3530-44a6-9d82-5b5b80e4c832",
-      "symbol": "HACK",
-      "qty": 72,
-      "price": 129.17,
+      "id": "2bb1694a-3e61-46c6-894d-69fcb6199050",
+      "symbol": "AAPL",
+      "qty": 26,
+      "price": 347.09,
       "direction": "LONG",
-      "cost": 9300.24
-    },
-    {
-      "id": "bb41ad3f-d9b7-460c-b1f5-72596433c4f4",
-      "symbol": "MSFT",
-      "qty": 16,
-      "price": 551.01,
-      "direction": "LONG",
-      "cost": 8816.16
+      "cost": 9024.34
     }
   ],
-  "capital_committed": 18116.4
+  "capital_committed": 9024.34
 }
