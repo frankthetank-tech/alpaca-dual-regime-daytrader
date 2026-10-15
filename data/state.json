@@ -1,37 +1,45 @@
 {
-  "date": "2026-10-14",
-  "macro_regime": "BULLISH",
-  "spy_0945": 775.37,
-  "spy_sma50": 768.5794000000001,
-  "spy_sma200": 723.7876,
-  "selected_candidate": "AAPL",
-  "direction": "LONG",
-  "entry_stop_price": 347.09,
-  "stop_loss_price": 342.92,
-  "take_profit_price": 356.88,
-  "order_status": "CLOSED_MOC",
+  "date": "2026-10-15",
+  "macro_regime": "BEARISH",
+  "spy_0945": 766.42,
+  "spy_sma50": 768.5502,
+  "spy_sma200": 724.1845500000001,
+  "selected_candidate": "CAT",
+  "direction": "SHORT",
+  "entry_stop_price": 707.62,
+  "stop_loss_price": 716.11,
+  "take_profit_price": 675.78,
+  "order_status": "2_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-14T20:00:49.429590",
-  "qualified_count": 11,
+  "last_updated": "2026-10-15T14:00:46.420201",
+  "qualified_count": 39,
   "qualified_candidates": [
-    "AAPL",
-    "PFE",
-    "WMT",
-    "CNC",
-    "CME",
-    "ELV",
-    "MRNA",
-    "KMI"
+    "CAT",
+    "SCHW",
+    "SMCI",
+    "LRCX",
+    "KLAC",
+    "HOOD",
+    "BOTZ",
+    "NVDA"
   ],
   "active_orders": [
     {
-      "id": "2bb1694a-3e61-46c6-894d-69fcb6199050",
-      "symbol": "AAPL",
-      "qty": 26,
-      "price": 347.09,
-      "direction": "LONG",
-      "cost": 9024.34
+      "id": "5e475883-bea5-4c25-b78d-b96873b2b7cf",
+      "symbol": "CAT",
+      "qty": 13,
+      "price": 707.62,
+      "direction": "SHORT",
+      "cost": 9199.06
+    },
+    {
+      "id": "6fed9c79-cb5a-4b2c-9202-20f2b0afd68d",
+      "symbol": "SCHW",
+      "qty": 100,
+      "price": 91.51,
+      "direction": "SHORT",
+      "cost": 9151.0
     }
   ],
-  "capital_committed": 9024.34
+  "capital_committed": 18350.059999999998
 }
