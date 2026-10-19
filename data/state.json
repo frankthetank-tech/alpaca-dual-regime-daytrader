@@ -1,45 +1,45 @@
 {
-  "date": "2026-10-16",
-  "macro_regime": "BULLISH",
-  "spy_0945": 772.185,
-  "spy_sma50": 768.5898,
-  "spy_sma200": 724.603525,
-  "selected_candidate": "BLK",
-  "direction": "LONG",
-  "entry_stop_price": 1145.93,
-  "stop_loss_price": 1132.18,
-  "take_profit_price": 1181.79,
-  "order_status": "CLOSED_MOC",
+  "date": "2026-10-19",
+  "macro_regime": "BEARISH",
+  "spy_0945": 766.71,
+  "spy_sma50": 768.4837,
+  "spy_sma200": 724.9855499999999,
+  "selected_candidate": "CPRT",
+  "direction": "SHORT",
+  "entry_stop_price": 27.3,
+  "stop_loss_price": 27.63,
+  "take_profit_price": 26.26,
+  "order_status": "2_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-16T19:54:44.421194",
-  "qualified_count": 27,
+  "last_updated": "2026-10-19T14:04:29.829259",
+  "qualified_count": 20,
   "qualified_candidates": [
-    "BLK",
-    "TSLA",
-    "KMI",
-    "BALL",
-    "MAR",
-    "BBY",
-    "SHEL",
-    "WMT"
+    "CPRT",
+    "RTX",
+    "DUOL",
+    "REM",
+    "GDXJ",
+    "LULU",
+    "NFLX",
+    "GE"
   ],
   "active_orders": [
     {
-      "id": "a8a354ec-0938-4c2f-b82f-556c3f7f2024",
-      "symbol": "BLK",
-      "qty": 8,
-      "price": 1145.93,
-      "direction": "LONG",
-      "cost": 9167.44
+      "id": "16940b83-7412-434d-9eed-f6263685c7b8",
+      "symbol": "CPRT",
+      "qty": 332,
+      "price": 27.3,
+      "direction": "SHORT",
+      "cost": 9063.6
     },
     {
-      "id": "b35c72ea-87a3-49ba-8fda-ba8575fff098",
-      "symbol": "TSLA",
-      "qty": 24,
-      "price": 370.38,
-      "direction": "LONG",
-      "cost": 8889.119999999999
+      "id": "368fba5e-418f-41f9-8c75-d5866a63da8e",
+      "symbol": "RTX",
+      "qty": 47,
+      "price": 191.1,
+      "direction": "SHORT",
+      "cost": 8981.699999999999
     }
   ],
-  "capital_committed": 18056.559999999998
+  "capital_committed": 18045.3
 }
