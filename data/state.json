@@ -1,45 +1,45 @@
 {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "macro_regime": "BEARISH",
-  "spy_0945": 766.71,
-  "spy_sma50": 768.4837,
-  "spy_sma200": 724.9855499999999,
-  "selected_candidate": "CPRT",
+  "spy_0945": 764.94,
+  "spy_sma50": 768.3525,
+  "spy_sma200": 725.4094499999999,
+  "selected_candidate": "AMAT",
   "direction": "SHORT",
-  "entry_stop_price": 27.3,
-  "stop_loss_price": 27.63,
-  "take_profit_price": 26.26,
-  "order_status": "CLOSED_MOC",
+  "entry_stop_price": 399.27,
+  "stop_loss_price": 404.06,
+  "take_profit_price": 381.3,
+  "order_status": "2_ORDERS_PLACED",
   "order_id": null,
-  "last_updated": "2026-10-19T20:02:23.304735",
-  "qualified_count": 20,
+  "last_updated": "2026-10-20T14:00:11.630296",
+  "qualified_count": 37,
   "qualified_candidates": [
-    "CPRT",
-    "RTX",
-    "DUOL",
-    "REM",
-    "GDXJ",
-    "LULU",
-    "NFLX",
-    "GE"
+    "AMAT",
+    "SOXX",
+    "INTC",
+    "SKYY",
+    "PAVE",
+    "PBW",
+    "ARM",
+    "KLAC"
   ],
   "active_orders": [
     {
-      "id": "16940b83-7412-434d-9eed-f6263685c7b8",
-      "symbol": "CPRT",
-      "qty": 332,
-      "price": 27.3,
+      "id": "3277d429-2bd9-45cb-99ba-d8324ccea435",
+      "symbol": "AMAT",
+      "qty": 22,
+      "price": 399.27,
       "direction": "SHORT",
-      "cost": 9063.6
+      "cost": 8783.939999999999
     },
     {
-      "id": "368fba5e-418f-41f9-8c75-d5866a63da8e",
-      "symbol": "RTX",
-      "qty": 47,
-      "price": 191.1,
+      "id": "e39444ed-e413-43f8-9e2c-3df5ce629150",
+      "symbol": "SOXX",
+      "qty": 18,
+      "price": 489.72,
       "direction": "SHORT",
-      "cost": 8981.699999999999
+      "cost": 8814.960000000001
     }
   ],
-  "capital_committed": 18045.3
+  "capital_committed": 17598.9
 }
